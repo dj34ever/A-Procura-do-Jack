@@ -18,6 +18,7 @@
             <input type="button" value="button4"/>
         </div>
         <div id="g-window">
+            
             <div id="g-map" class="inline">
                <div id="pos1">
                 <img src="sprites/beary.png" alt="casa" onclick="construirCasa(this.parentNode.id)"/>

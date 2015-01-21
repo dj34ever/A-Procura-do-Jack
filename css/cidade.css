@@ -10,7 +10,7 @@ and open the template in the editor.
 #top{
     background-color: darkgrey;
 }
-#content{
+#g-map{
     background-image: url(../sprites/mapa_cidade2.png);
     background-repeat: no-repeat;
     width:800px;

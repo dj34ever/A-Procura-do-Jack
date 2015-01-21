@@ -3,16 +3,15 @@
     Author     : night8ug
 */
 
-/*TEXT*/
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p{
+body{
+     border: 1px solid #000000;
+    width: 95%;
+    margin: auto;
+    position: relative;
     
 }
+
+
 
 /*DISPLAY*/
 .display{
@@ -38,25 +37,8 @@ p{
 
 /*DIV MAIN*/
 
-#header,
-#menu,
-#window-game,
-#gm-window,
-#g-window,
-#g-window2,
-#news,
-#footer{
-    border: 1px solid #000000;
-    width: 95%;
-    margin: auto;
-    position: relative;
-}
 
-#window-game{
-}
 
-#g-window{
-}
 
 #gm-window,
 #g-map,
