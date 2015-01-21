@@ -11,23 +11,6 @@
     <body>
         <div id="header">
             <img src="limg/draco_ico_temp.png" alt="Procura o Jack" />
-            <div id="rb"> 
-            <?php
-                if (!isset($_SESSION['user'])) {?>
-                <form name="login" action="login.php" method="POST">
-                    <div>Username:<input type="text" name="username" value="" /></div>
-                    <div>Password:<input type="password" name="password" value="" /></div>
-                    <div>
-                        <input type="submit" value="Login" name="submit" />
-                        <span><input type="button" value="Registar" onclick="window.open('novoutilizador.php')" /></span>
-                    </div>
-                </form>
-                <?php
-                    if ($_GET['false'] == 1) {
-                        echo 'Utilizador ou Palavra passe Errada';
-                    }?>
-            </div>
-        <?php } ?>
         </div>
         <div id="menu">
             <input type="button" value="button1"/>
