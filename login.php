@@ -1,6 +1,7 @@
 <?php
 
 require("config.php");
+
 $erro = "Utilizador ou Palavra Passe incorrecta.";
 
 
@@ -31,6 +32,6 @@ if (isset($_POST['submit'])) {
        
     }
 }
-
+else die(header('Location: main.php?false=1'));
 ?>
  
