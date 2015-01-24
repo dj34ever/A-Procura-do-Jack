@@ -1,16 +1,20 @@
+<?php 
+session_start();
+require ('action.php');
+?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
 
-        <link rel="stylesheet" media="screen" type="text/css" href="lcss/game.css" />
+        <link rel="stylesheet" media="screen" type="text/css" href="css/game.css" />
         <title>Jack Search</title>
-        <script type="text/javascript" src="lcjs/game.js"></script>
+        <script type="text/javascript" src="js/game.js"></script>
     </head>
     <body>
         <div id="header">
-            <img src="limg/draco_ico_temp.png" alt="Procura o Jack" />
+            <img src="images/draco_ico_temp.png" alt="Procura o Jack" />
         </div>
         <div id="menu">
             <input type="button" value="button1"/>
@@ -31,21 +35,22 @@
             <div id="g-info">
                 <?php
 
-                    /*VOABULARIO*/
+                    /*VOCABULARIO*/
                     $v_user = "Jogador: ";
                     $v_cidade = "Atualmente em: ";
                     $v_ouro = "Ouro: ";
                     $v_nota = "Notas: ";
 
                     /*VALORES*/
-                    $username = $_SESSION['username']; //"A";
+                    $username = $_SESSION['user']; //"A";
                     $cidade = $_SESSION['']; //"CidadeB";
-                    $ouro = $_SESSION['']; //700;
+                    $moedas= $_SESSION['moedas'];
+                    $ouro = $_SESSION['ouro']; //700;
                     $nota = $_SESSION['']; //3;
                         echo "<div class=''><p>".$v_user.$username."</p></div>\n"
                             ."<div class=''><p>".$v_cidade.$cidade."</p></div>\n"
                             ."<div class=''><p>".$v_ouro.$ouro."</p></div>\n"
-                            ."<div class=''><p>".$v_nota.$nota."</p></div>";
+                            ."<div class=''><p>".$v_nota.$moedas."</p></div>";
                     ?>
     <!--                <div class=""><p>Username</p></div>
                     <div class=""><p>Nome Cidade</p>"</div>
