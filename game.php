@@ -20,7 +20,7 @@ require ('action.php');
             <input type="button" value="button1"/>
             <input type="button" value="button2"/>
             <input type="button" value="button3"/>
-            <input type="button" value="button4"/>
+            <input type="button" value="Logout" onclick="window.location.href = 'logout.php'"/>
         </div>
         <div id="g-window">
             
