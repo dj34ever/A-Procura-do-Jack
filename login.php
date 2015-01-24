@@ -27,10 +27,7 @@ if (isset($_POST['submit'])) {
         header('Location: game.php');
     } else {
           
-        die(header('Location: main.php?false=1'));
-       
-        
-        
+        die(header('Location: main.php?false=1'));    
     }
 }
 else die(header('Location: main.php?false=1'));
