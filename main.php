@@ -35,7 +35,9 @@ and open the template in the editor.
                 }
                 ?>
             </div>
-        <?php } ?>
+        <?php } 
+        else header('Location: game.php');     
+        ?>
         <div>
 
         </div>
