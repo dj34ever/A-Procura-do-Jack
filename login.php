@@ -29,7 +29,8 @@ if (isset($_POST['submit'])) {
           
         die(header('Location: main.php?false=1'));
        
-       
+        
+        
     }
 }
 else die(header('Location: main.php?false=1'));
