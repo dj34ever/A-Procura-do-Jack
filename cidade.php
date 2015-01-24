@@ -1,7 +1,5 @@
 <?php
-require("config.php");
 include ("action.php");
-session_start();
 ?>
 <!DOCTYPE html>
 <!--

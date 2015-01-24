@@ -1,6 +1,8 @@
 <?php 
 session_start();
 require ('action.php');
+if (!isset($_SESSION['user']))
+            die(header('Location: logout.php'));
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,19 +36,20 @@ require ('action.php');
         <div id="g-window2">
             <div id="g-info">
                 <?php
-
+                    getuservalues();//preenche o $_SESSION com os dados do user
                     /*VOCABULARIO*/
                     $v_user = "Jogador: ";
                     $v_cidade = "Atualmente em: ";
                     $v_ouro = "Ouro: ";
                     $v_nota = "Notas: ";
 
+                    
                     /*VALORES*/
                     $username = $_SESSION['user']; //"A";
-                    $cidade = $_SESSION['']; //"CidadeB";
+                    //$cidade = $_SESSION['']; //"CidadeB";
                     $moedas= $_SESSION['moedas'];
                     $ouro = $_SESSION['ouro']; //700;
-                    $nota = $_SESSION['']; //3;
+                    //$nota = $_SESSION['']; //3;
                         echo "<div class=''><p>".$v_user.$username."</p></div>\n"
                             ."<div class=''><p>".$v_cidade.$cidade."</p></div>\n"
                             ."<div class=''><p>".$v_ouro.$ouro."</p></div>\n"
