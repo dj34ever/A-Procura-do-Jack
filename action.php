@@ -1,7 +1,8 @@
 <?php
-
 require ('config.php');
 session_start();
+if (!isset($_SESSION['utilizador_nome']))
+            die(header('Location: logout.php'));
 
 function getuservalues() {
 
