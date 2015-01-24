@@ -17,7 +17,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        if (!isset($_SESSION['user']))
+        if (!isset($_SESSION['utilizador_nome']))
             die(header('Location: logout.php'));
 
 //obtem valores da bd e armazena na sessão do user
@@ -27,7 +27,7 @@ and open the template in the editor.
 
         <div id="top">
             <span>
-                <?php print($_SESSION['user']); ?>
+                <?php print($_SESSION['utilizador_nome']); ?>
             </span> 
             <span>
                 <?php echo($_SESSION['moedas'] . "$"); ?>

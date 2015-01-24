@@ -1,7 +1,7 @@
 <?php 
 session_start();
 require ('action.php');
-if (!isset($_SESSION['user']))
+if (!isset($_SESSION['utilizador_nome']))
             die(header('Location: logout.php'));
 ?>
 <!DOCTYPE html>
@@ -43,14 +43,11 @@ if (!isset($_SESSION['user']))
                     $v_ouro = "Ouro: ";
                     $v_nota = "Notas: ";
 
-                    
-                    
-                    
                     /*VALORES*/
-                    $username = $_SESSION['user']; //"A";
-                    //$cidade = $_SESSION['']; //"CidadeB";
-                    $moedas= $_SESSION['moedas'];
-                    $ouro = $_SESSION['ouro']; //700;
+                    $username = $_SESSION['utilizador_nome']; //"A";
+                    $cidade = $_SESSION['cidade_nome']; //"CidadeB";
+                    $moedas= $_SESSION['utilizador_moedas'];
+                    $ouro = $_SESSION['utilizador_ouro']; //700;
                     //$nota = $_SESSION['']; //3;
                         echo "<div class=''><p>".$v_user.$username."</p></div>\n"
                             ."<div class=''><p>".$v_cidade.$cidade."</p></div>\n"

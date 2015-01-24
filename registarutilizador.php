@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
     
     if ($query) { // The user name and email address are correct
         session_start();
-        $_SESSION['user'] = $username;
+        $_SESSION['utilizador_nome'] = $username;
         header('Location: cidade.php');
     } else {
             

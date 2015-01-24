@@ -19,7 +19,7 @@ and open the template in the editor.
         </div>
         <div> 
             <?php
-            if (!isset($_SESSION['user'])) {
+            if (!isset($_SESSION['utilizador_nome'])) {
                 ?>
                 <form name="login" action="login.php" method="POST">
                     <div>Username:<input type="text" name="username" value="" /></div>
