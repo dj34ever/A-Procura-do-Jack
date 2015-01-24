@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
     if (mysqli_num_rows($query)) { // The user name and email address are correct
         session_start();
         $_SESSION['user'] = $username;
-        header('Location: cidade.php');
+        header('Location: game.php');
     } else {
           
         die(header('Location: main.php?false=1'));
