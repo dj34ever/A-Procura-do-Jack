@@ -5,5 +5,5 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-header('Location: main.php?false=1');
+header('Location: main.php');
 ?>
