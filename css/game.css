@@ -11,6 +11,8 @@ body{
     
 }
 
+
+
 /*DISPLAY*/
 .display{
     display: block;
@@ -34,6 +36,8 @@ body{
 }
 
 /*DIV MAIN*/
+
+
 
 
 #gm-window,
@@ -111,15 +115,17 @@ body{
     border: 1px solid #000000;
     position: relative;
     padding-right: 10px;
-    padding-left: 10px;
-
-
+    padding-left: 10px
 }
 
 #news{
     clear: both;
 }
 
+img{
+    width: 50px;
+    height: 50px;
+}
 
 @media screen and (max-width: 490.9px) {
 /*    body {
