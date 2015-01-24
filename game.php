@@ -44,6 +44,8 @@ if (!isset($_SESSION['user']))
                     $v_nota = "Notas: ";
 
                     
+                    
+                    
                     /*VALORES*/
                     $username = $_SESSION['user']; //"A";
                     //$cidade = $_SESSION['']; //"CidadeB";
