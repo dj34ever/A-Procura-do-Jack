@@ -14,7 +14,7 @@ and open the template in the editor.
     <body>
         <div id="top">
 
-            <a href="main.php"><h1><img src="sprites/beary.png" />À procura de Jack</h1></a>
+            <a href="main.php"><h1><img src="images/draco_ico_temp.png" />À procura de Jack</h1></a>
 
         </div>
         <div> 
