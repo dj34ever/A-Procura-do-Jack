@@ -4,11 +4,10 @@
 */
 
 body{
-     border: 1px solid #000000;
+    border: 1px solid #000000;
     width: 95%;
     margin: auto;
-    position: relative;
-    
+
 }
 
 
@@ -38,10 +37,6 @@ body{
 /*DIV MAIN*/
 
 
-
-
-#gm-window,
-#g-map,
 #g-info,
 #dicas{
     background: #0056FF;
@@ -50,37 +45,26 @@ body{
     padding-top: 0px;
     padding-bottom: 0px;
 }
-@media screen and (max-width: 490.9px) {
-    #g-map{
-        clear: both;
-        position: relative;
-        background-color: #FFFF66; 
-    }
-}
+
 
 #g-map{
-    float: left;
-    width: 69%;
-    height: 100%;
-    background-color: #FFFF66;
-    border: 1px solid #000000;
-}
 
-@media screen and (max-width: 490.9px) {
-    #gm-window{
-        clear: both;
-        position: relative;
-        background-color: #FFCC00; 
-    }
+    background: url(../images/test_floor.png) no-repeat;
+    //background-size: 100%;
+    width: 801px;
+    height: 473px;
+    float: left;
+    
+    box-shadow: 10px 10px 5px #888888; 
+    border: 2px solid;
+    border-radius: 25px; 
 }
 
 #gm-window{
-    clear: right;
-    float: left;
-    width: 27%;
-    background-color: #FFCC00;
-    position: relative;
+
+    float: right;
 }
+
 
 #g-window2{
     clear: both;
@@ -128,7 +112,7 @@ img{
 }
 
 @media screen and (max-width: 490.9px) {
-/*    body {
-        background-color: lightblue;
-    }*/
+    /*    body {
+            background-color: lightblue;
+        }*/
 }
