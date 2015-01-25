@@ -13,6 +13,7 @@ if (!isset($_SESSION['utilizador_nome']))
         <link rel="stylesheet" media="screen" type="text/css" href="css/game.css" />
         <title>Jack Search</title>
         <script type="text/javascript" src="js/game.js"></script>
+        <script type="text/javascript" src="js/mt.js"></script>
     </head>
     <body>
         <div id="header">
