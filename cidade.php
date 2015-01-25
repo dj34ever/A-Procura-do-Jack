@@ -22,6 +22,7 @@ and open the template in the editor.
 
 //obtem valores da bd e armazena na sessão do user
         
+        
         getuservalues();
         ?>
 
