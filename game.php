@@ -25,9 +25,8 @@ if (!isset($_SESSION['utilizador_nome']))
             <input type="button" value="Logout" onclick="window.location.href = 'logout.php'"/>
         </div>
         <div id="g-window">
-            
-            <div id="g-map" class="inline">
-                <p>Game Window</p>
+            <div id="g-map">
+               
             </div>
             <div id="gm-window" class="inline">
                 <p>buy menu</p>
@@ -44,20 +43,16 @@ if (!isset($_SESSION['utilizador_nome']))
                     $v_nota = "Notas: ";
 
                     /*VALORES*/
-                    $username = $_SESSION['utilizador_nome']; //"A";
-                    $cidade = $_SESSION['cidade_nome']; //"CidadeB";
+                    $username = $_SESSION['utilizador_nome']; 
+                    $cidade = $_SESSION['cidade_nome']; 
                     $moedas= $_SESSION['utilizador_moedas'];
-                    $ouro = $_SESSION['utilizador_ouro']; //700;
-                    //$nota = $_SESSION['']; //3;
-                        echo "<div class=''><p>".$v_user.$username."</p></div>\n"
-                            ."<div class=''><p>".$v_cidade.$cidade."</p></div>\n"
-                            ."<div class=''><p>".$v_ouro.$ouro."</p></div>\n"
-                            ."<div class=''><p>".$v_nota.$moedas."</p></div>";
+                    $ouro = $_SESSION['utilizador_ouro'];
+                    
+                        echo "<div><p>".$v_user.$username."</p></div>"
+                            ."<div><p>".$v_cidade.$cidade."</p></div>"
+                            ."<div><p>".$v_ouro.$ouro."</p></div>"
+                            ."<div><p>".$v_nota.$moedas."</p></div>";
                     ?>
-    <!--                <div class=""><p>Username</p></div>
-                    <div class=""><p>Nome Cidade</p>"</div>
-                    <div class=""><p>O: 999999999</p></div>
-                    <div class=""><p>$: 999999999</p></div>-->
             </div>
             <div id="dica">
                         <div>
