@@ -45,10 +45,32 @@ body{
     padding-top: 0px;
     padding-bottom: 0px;
 }
-
+#draggables {
+	height: 100px;
+	position: relative;
+}
+ 
+#draggables div {
+	top: 10px;
+	left: 10px;
+	width: 50px;
+	height: 50px;
+	cursor: move;
+	background: #c17878;
+	position: absolute;
+}
+ 
+ 
+#droppables div {
+	float: left;
+	margin: 10px;
+	width: 100px;
+	height: 100px;
+	background: #1d1d20;
+}
+ 
 
 #g-map{
-
     background: url(../images/test_floor.png) no-repeat;
     //background-size: 100%;
     width: 801px;
