@@ -31,7 +31,7 @@ Implementar:
                     <label for="ed_nome">Nome:</label>
                     <input type="text" id="ed_nome" name="Nome do Edificio" maxlength="50" value="" /><br/>
                     <label for="ed_tipo">Tipo:</label>
-                    <select>
+                    <select id="ed_tipo">
                         <option value="0">(0)Dormitório</option>
                         <option value="1">(1)Armazém</option>
                         <option value="2">(2)Hospital</option>
