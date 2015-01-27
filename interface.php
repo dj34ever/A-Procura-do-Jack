@@ -41,7 +41,7 @@ Implementar:
                     <input type="radio" id="admin" name="tipo_conta" tabindex="1" value="1" />
                     <label for="admin">(1)Admin</label><br/>
                 </div>
-<!--                <div><input type="submit" value="Adicionar" name="ed_submit"/></div>-->
+                <div><input type="submit" value="Adicionar" name="u_submit"/></div>
             </form>
         </div>
         <div id="edificio">
@@ -70,7 +70,7 @@ Implementar:
                     <p><label for="ed_preco">Custo Contrução:</label>
                         <input type="text" id="ed_preco" name="Custo Construção" style="width: 75px" maxlength="9" value="" /> Moedas</p>
                 </div>
-<!--                <div><input type="submit" value="Adicionar" name="ed_submit"/></div>-->
+                <div><input type="submit" value="Adicionar" name="ed_submit"/></div>
             </form>
         </div>
         <div id="missao">
@@ -103,7 +103,7 @@ Implementar:
                     <label for="q_gold">Comsumo Ouro:</label>
                     <input type="text" id="q_gold" name="Ouro" value="" />
                 </div>
-<!--                <div><input type="submit" value="Adicionar" name="q_submit"/></div>-->
+                <div><input type="submit" value="Adicionar" name="q_submit"/></div>
             </form>
         </div>
         <div id="criatura">
@@ -147,7 +147,7 @@ Implementar:
                         <option value="5">(5)Mõr</option>Futuro?-->
                     </select>
                 </div>
-<!--                <div><input type="submit" value="Addicionar" name="c_submit"/></div>-->
+                <div><input type="submit" value="Addicionar" name="c_submit"/></div>
             </form>
         </div>
         <div>
