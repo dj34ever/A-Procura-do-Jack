@@ -6,14 +6,27 @@ $ativo = 0;
 $moedas = 100000;
 $ouro = 100;
 
-if (isset($_POST['submit'])) {
-    if (!isset($_POST['username'])) {
-        die(printf("Campo Utilizador não preenchido"));
-    } elseif (!isset($_POST['password'])) {
-        die(printf("Campo Password não preenchido"));
-    } elseif (!isset($_POST['email'])) {
-        die(printf("Campo Email não preenchido"));
+/*Criei um novo utilizador em branco e aceitou na base de dados sem qualquer mensagem*/
+
+//if (isset($_POST['submit'])) {
+//    if (!isset($_POST['username'])) {
+//        die(printf("Campo Utilizador não preenchido"));
+//    } elseif (!isset($_POST['password'])) {
+//        die(printf("Campo Password não preenchido"));
+//    } elseif (!isset($_POST['email'])) {
+//        die(printf("Campo Email não preenchido"));
+//    }
+
+if(isset($_POST['submit'])){
+    if(is_null($_POST['username']) || empty($_POST['username']) ){
+        die(header('location: novoutilizador.php?false=0'));
+    } elseif(is_null($_POST['username']) || empty($_POST['password'])) {
+        die(header('location: novoutilizador.php?false=0'));
+    }elseif(is_null($_POST['email']) || empty($_POST['email'])){
+        die(header('location: novoutilizador.php?false=0'));
     }
+    
+
 
    
     //$username = mysqli_escape_string($dbConn, $_POST['username']);
@@ -24,9 +37,9 @@ if (isset($_POST['submit'])) {
     $password = mysqli_escape_string($dbConn, $_POST['password']);
     $password = hash("sha512", $password);
     
-   
-     if(($username===null || $email===null || $password===null))
-          die(header('Location: novoutilizador.php?false=1'));
+   //testing
+//     if(($username===null || $email===null || $password===null))
+//          die(header('Location: novoutilizador.php?false=1'));
      
     $sql = "INSERT INTO utilizador (username, password, email, moedas, ouro, ativa) VALUES ('" . $username . "', '" . $password . "', '" . $email . "', '" . $moedas . "', '" .  $ouro . "', '" . $ativo . "')";
      
