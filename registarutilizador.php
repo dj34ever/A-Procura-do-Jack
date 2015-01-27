@@ -37,9 +37,9 @@ if(isset($_POST['submit'])){
     $password = mysqli_escape_string($dbConn, $_POST['password']);
     $password = hash("sha512", $password);
     
-   //testing
-//     if(($username===null || $email===null || $password===null))
-//          die(header('Location: novoutilizador.php?false=1'));
+//   testing
+     if(($username===null || $email===null || $password===null))
+          die(header('Location: novoutilizador.php?false=1'));
      
     $sql = "INSERT INTO utilizador (username, password, email, moedas, ouro, ativa) VALUES ('" . $username . "', '" . $password . "', '" . $email . "', '" . $moedas . "', '" .  $ouro . "', '" . $ativo . "')";
      
