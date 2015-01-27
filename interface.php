@@ -29,7 +29,19 @@ Implementar:
             <form action="" method="POST">
                 <div>
                     <?php echo 'Existem ' . $totalContas . ' Contas<br/>'; ?>
+                    <label for="u_nome">Nome:</label>
+                    <input type="text" id="u_nome" name="Nome de Utilizador" maxlength="50" value="" /><br/>
+                    <label for="u_pass">Senha:</label>
+                    <input type="text" id="u_pass" name="Senha" maxlength="8" value="" /><br/>
+                    <label for="u_email">Email:</label>
+                    <input type="text" id="u_email" name="Email" maxlength="50" value="" /><br/>
+                    <p>Tipo de Conta:</p>
+                    <input type="radio" id="comum" name="tipo_conta" tabindex="0" value="0" />
+                    <label for="comum">(0)Comum</label><br/>
+                    <input type="radio" id="admin" name="tipo_conta" tabindex="1" value="1" />
+                    <label for="admin">(1)Admin</label><br/>
                 </div>
+<!--                <div><input type="submit" value="Adicionar" name="ed_submit"/></div>-->
             </form>
         </div>
         <div id="edificio">
@@ -39,7 +51,7 @@ Implementar:
                     <?php echo 'Existem ' . $totalEdificio . ' Edificios</br>'; ?>
                     <label for="ed_nome">Nome:</label>
                     <input type="text" id="ed_nome" name="Nome do Edificio" maxlength="50" value="" /><br/>
-                    <label for="ed_evol"></label>
+                    <label for="ed_evol">Evolução:</label>
                     <select id="ed_evol">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -54,7 +66,7 @@ Implementar:
                         <option value="4">(4)Centro de Missões</option>
                     </select><br/>
                     <label for="ed_img">Imagem (100x100 px):</label>
-                    <input type="file" id="ed_img" name="Imagem Edificio" /><br/>
+                    <p><input type="file" id="ed_img" name="Imagem Edificio" />'Não implementado'</p><br/>
                     <p><label for="ed_preco">Custo Contrução:</label>
                         <input type="text" id="ed_preco" name="Custo Construção" style="width: 75px" maxlength="9" value="" /> Moedas</p>
                 </div>
