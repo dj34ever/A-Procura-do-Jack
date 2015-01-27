@@ -29,12 +29,16 @@ if (isset($_POST['submit'])) {
     $password = mysqli_escape_string($dbConn, $_POST['password']);
     $password = hash("sha512", $password);
     
-     if(($username===null || $email===null || $password===null))
-          die(header('Location: novoutilizador.php?false=1'));
+//     if(($username===null || $email===null || $password===null))
+        if(!is_null($username) || !is_null($email) || !is_null($password)){
+          //die(header('Location: novoutilizador.php?false=1'));
      
-    $sql = "INSERT INTO utilizador (username, password, email, moedas, ouro, ativa) VALUES ('" . $username . "', '" . $password . "', '" . $email . "', '" . $moedas . "', '" .  $ouro . "', '" . $ativo . "')";
-     
-    $query = mysqli_query($dbConn, $sql);
+        $sql = "INSERT INTO utilizador (username, password, email, moedas, ouro, ativa) VALUES ('" . $username . "', '" . $password . "', '" . $email . "', '" . $moedas . "', '" .  $ouro . "', '" . $ativo . "')";
+        $query = mysqli_query($dbConn, $sql);
+        }else{
+            die(header('Location: novoutilizador.php?false=1'));
+        }
+    
     
     if ($query) { // The user name and email address are correct
         session_start();
