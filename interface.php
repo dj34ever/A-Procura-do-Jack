@@ -10,6 +10,7 @@ $totalCriatura = 0;
 <!--
 Interface para admin
 Implementar:
+    Ligar à base de dados
     Restringir acesso a contas tipo 1 (admin)
     Adicionar elementos à base de dados sem imagens
     Adicionar elementos à base de dados com imagens
