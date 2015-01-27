@@ -1,6 +1,6 @@
 <?php //session_start();
 
-
+$totalContas = 0;
 $totalEdificio =0;
 $totalQuest = 0;
 $totalCriatura = 0;
@@ -24,6 +24,14 @@ Implementar:
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <div id="utilizador">
+            <h4>Utilizador</h4>
+            <form action="" method="POST">
+                <div>
+                    <?php echo 'Existem ' . $totalContas . ' Contas<br/>'; ?>
+                </div>
+            </form>
+        </div>
         <div id="edificio">
             <h4>Edificios</h4>
             <form action="" method="POST">
