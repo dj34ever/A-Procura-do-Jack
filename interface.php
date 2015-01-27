@@ -31,6 +31,12 @@ Implementar:
                     <?php echo 'Existem ' . $totalEdificio . ' Edificios</br>'; ?>
                     <label for="ed_nome">Nome:</label>
                     <input type="text" id="ed_nome" name="Nome do Edificio" maxlength="50" value="" /><br/>
+                    <label for="ed_evol"></label>
+                    <select id="ed_evol">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select><br/>
                     <label for="ed_tipo">Tipo:</label>
                     <select id="ed_tipo">
                         <option value="0">(0)Dormitório</option>
@@ -87,6 +93,12 @@ Implementar:
                     <?php echo 'Existem ' . $totalCriatura . 'Crituras<br/>'; ?>
                     <label for="c_nome">Nome da Criatura:</label>
                     <input type="text" id="c_nome" name="Nome da Criatura" maxlength="50" value="" /><br/>
+                    <label for="c_evol"></label>
+                    <select id="c_evol">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select><br/>
                     <label for="c_tipo">Tipo:</label>
                     <select id="c_tipo">
                         <option value="0">(0)Ave</option>
