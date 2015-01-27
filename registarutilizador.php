@@ -8,23 +8,15 @@ $ouro = 100;
 
 /*Criei um novo utilizador em branco e aceitou na base de dados sem qualquer mensagem*/
 
-//if (isset($_POST['submit'])) {
-//    if (!isset($_POST['username'])) {
-//        die(printf("Campo Utilizador não preenchido"));
-//    } elseif (!isset($_POST['password'])) {
-//        die(printf("Campo Password não preenchido"));
-//    } elseif (!isset($_POST['email'])) {
-//        die(printf("Campo Email não preenchido"));
-//    }
-
-if(isset($_POST['submit'])){
-    if(is_null($_POST['username']) || empty($_POST['username']) ){
-        die(header('location: novoutilizador.php?false=0'));
-    } elseif(is_null($_POST['username']) || empty($_POST['password'])) {
-        die(header('location: novoutilizador.php?false=0'));
-    }elseif(is_null($_POST['email']) || empty($_POST['email'])){
-        die(header('location: novoutilizador.php?false=0'));
+if (isset($_POST['submit'])) {
+    if (!isset($_POST['username'])) {
+        die(printf("Campo Utilizador não preenchido"));
+    } elseif (!isset($_POST['password'])) {
+        die(printf("Campo Password não preenchido"));
+    } elseif (!isset($_POST['email'])) {
+        die(printf("Campo Email não preenchido"));
     }
+
     
 
 
@@ -37,7 +29,6 @@ if(isset($_POST['submit'])){
     $password = mysqli_escape_string($dbConn, $_POST['password']);
     $password = hash("sha512", $password);
     
-//   testing
      if(($username===null || $email===null || $password===null))
           die(header('Location: novoutilizador.php?false=1'));
      
