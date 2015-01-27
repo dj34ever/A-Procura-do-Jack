@@ -10,7 +10,7 @@ $totalCriatura = 0;
 <!--
 Interface para admin
 Implementar:
-    Restrigir acesso a contas tipo 1 (admin)
+    Restringir acesso a contas tipo 1 (admin)
     Adicionar elementos à base de dados sem imagens
     Adicionar elementos à base de dados com imagens
     Vizulaizar base de dados
@@ -110,8 +110,8 @@ Implementar:
                         <option value="1">(1)Incomum</option>
                         <option value="2">(2)Raro</option>
                         <option value="3">(3)Lendário</option>
-<!--                        <option value="4">Deva</option>Futuro?
-                        <option value="5">Mõr</option>Futuro?-->
+<!--                        <option value="4">(4)Deva</option>Futuro?
+                        <option value="5">(5)Mõr</option>Futuro?-->
                     </select>
                 </div>
 <!--                <div><input type="submit" value="Addicionar" name="c_submit"/></div>-->
