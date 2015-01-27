@@ -14,6 +14,7 @@ and open the template in the editor.
         
         <div>
             <form action="registarutilizador.php" method="POST">
+                <?php ?>
                 <div>Username:<input type="text" name="username" value="" /></div>
                 <div>Password:<input type="password" name="password" value="" /></div>
                 <div>Email:<input type="text" name="email" value="" /></div>
