@@ -21,16 +21,9 @@ and open the template in the editor.
             </form>
         </div>
         <?php
-            switch($_GET['false']){
-                case 1 :{echo 'Email ou Username já se encontra registado!';} break;
-                case 2 :{echo '';} break;
-                case 3 :{echo '';} break;
-                case 4 :{echo '';} break;
-                default:{echo 'Necessita preencher todos os campos!';}
-            }
-//                if ($_GET['false'] == 1) {
-//                    echo 'Email ou Username já registado!';
-//                }
+                if ($_GET['false'] == 1) {
+                    echo 'Email ou Username já registado!';
+                }
                 ?>
         <div>
 
