@@ -11,11 +11,9 @@ $erro = "Utilizador ou Palavra Passe incorrecta.";
 $ativo = 1;
 $moedas = 100000;
 $ouro = 100;
-
-
-/* Criei um novo utilizador em branco e aceitou na base de dados sem qualquer mensagem */
-
+//Verifica se foi submetido um post
 if (isset($_POST['submit'])) {
+    //verifica se os campos foram preenchidos
     if (empty($_POST['username'])) {
         die(header('Location: novoutilizador.php?false=1'));
     } elseif (empty($_POST['password'])) {
@@ -23,38 +21,46 @@ if (isset($_POST['submit'])) {
     } elseif (empty($_POST['email'])) {
         die(header('Location: novoutilizador.php?false=1'));
     }
-    echo "<script type='text/javascript'>alert('$message');</script>";
     
+    //Encapsula os dados
     $username = mysqli_escape_string($dbConn, $_POST['username']);
-
     $email = mysqli_escape_string($dbConn, $_POST['email']);
-
     $password = mysqli_escape_string($dbConn, $_POST['password']);
-    $password = hash("sha512", $password);
     $cidade = mysqli_escape_string($dbConn, $_POST['cidade']);
+    //Converte a password em plain text para sha512
+    $password = hash("sha512", $password);
+    
+   //Caso o utilizador não tenha introduzido um nome para a cidade atribui um por defeito
     if (empty($cidade)) {
         $cidade = "Nova Cidade";
     }
-
+//Verifica se os campos, após encapsulamento não estão vazios
     if (!($username === null || $email === null || $password === null)) {
-        $sql = "SELECT id FROM utilizador WHERE username = '" . $username . "' LIMIT 1"; //Seleciona user com o mesmo nome
-        $query1 = mysqli_query($dbConn, $sql);
-
-        if (mysqli_num_rows($query1) > 0) { // Se existir termina
+        //Verifica se existe um utilizador com o mesmo nome
+        $sql = "SELECT id FROM utilizador WHERE username = '" . $username . "' LIMIT 1";
+       //Executa a query
+        $query = mysqli_query($dbConn, $sql);
+        if (mysqli_num_rows($query) > 0) { // Se existir termina
             die(header('Location: novoutilizador.php?false=3'));
         }
+        
         //cria o utilizador
         $sql = "INSERT INTO utilizador (username, password, email, moedas, ouro, ativa) VALUES ('" . $username . "', '" . $password . "', '" . $email . "', '" . $moedas . "', '" . $ouro . "', '" . $ativo . "')";
         $query = mysqli_query($dbConn, $sql);
-       
-        if ($query) { // Se criado com sucesso
+       // Se criado com sucesso
+        if ($query) { 
             session_start();
+            //Armazena o nome do user
             $_SESSION['utilizador_nome'] = $username;
+            //Armazena os restantes valores
             getuservalues();
+            //Cria a cidade
             $sql = "INSERT INTO cidade (nome, id_utilizador) VALUES ('" . $cidade . "', '" . $_SESSION['utilizador_id'] . "')";
             $query = mysqli_query($dbConn, $sql);
             $_SESSION['cidade_nome'] = $cidade;
+            
             if ($query) {
+                //Procegue para o jogo
                 header('Location: game.php');
             } else {
                 die(header('Location: novoutilizador.php?false=2'));
