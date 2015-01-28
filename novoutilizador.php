@@ -28,6 +28,9 @@ and open the template in the editor.
                 elseif ($_GET['false'] == 2) {
                     echo 'Erro ao criar o seu registo. Tente novamente!';
                 }
+                elseif ($_GET['false'] == 3) {
+                    echo 'Nome de utilizador já em utilização!';
+                }
                 ?>
         <div>
 
