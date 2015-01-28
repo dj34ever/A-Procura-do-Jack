@@ -3,7 +3,6 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 $message = "wrong answer";
-//echo "<script type='text/javascript'>alert('$message');</script>";
 
 require("action.php");
 //require("config.php");
@@ -34,7 +33,7 @@ if (isset($_POST['submit'])) {
     if (empty($cidade)) {
         $cidade = "Nova Cidade";
     }
-//Verifica se os campos, após encapsulamento não estão vazios
+    //Verifica se os campos, após encapsulamento não estão vazios
     if (!($username === null || $email === null || $password === null)) {
         //Verifica se existe um utilizador com o mesmo nome
         $sql = "SELECT id FROM utilizador WHERE username = '" . $username . "' LIMIT 1";

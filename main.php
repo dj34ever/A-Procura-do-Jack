@@ -1,10 +1,6 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
         <title>Login</title>
@@ -33,10 +29,6 @@ and open the template in the editor.
                 if ($_GET['false'] == 1) {
                     echo 'Utilizador ou Palavra passe Errada';
                 }
-                
-                $a="ola mundo";
-                $b="Mundo novo";
-                echo ($a . $b);
                 
                 ?>
             </div>
