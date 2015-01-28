@@ -1,7 +1,8 @@
-<?php //session_start();
+<?php
+session_start();
 
 $totalContas = 0;
-$totalEdificio =0;
+$totalEdificio = 0;
 $totalQuest = 0;
 $totalCriatura = 0;
 ?>
@@ -24,11 +25,16 @@ Implementar:
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <?php
+        //Verifica se existe uma sessão iniciada
+        if (!isset($_SESSION['utilizador_nome']))
+            die(header('Location: logout.php'));
+        ?>
         <div id="utilizador">
             <h4>Utilizador</h4>
             <form action="" method="POST">
                 <div>
-                    <?php echo 'Existem ' . $totalContas . ' Contas<br/>'; ?>
+<?php echo 'Existem ' . $totalContas . ' Contas<br/>'; ?>
                     <label for="u_nome">Nome:</label>
                     <input type="text" id="u_nome" name="Nome de Utilizador" maxlength="50" value="" /><br/>
                     <label for="u_pass">Senha:</label>
@@ -48,7 +54,7 @@ Implementar:
             <h4>Edificios</h4>
             <form action="" method="POST">
                 <div>
-                    <?php echo 'Existem ' . $totalEdificio . ' Edificios</br>'; ?>
+<?php echo 'Existem ' . $totalEdificio . ' Edificios</br>'; ?>
                     <label for="ed_nome">Nome:</label>
                     <input type="text" id="ed_nome" name="Nome do Edificio" maxlength="50" value="" /><br/>
                     <label for="ed_evol">Evolução:</label>
@@ -77,7 +83,7 @@ Implementar:
             <h4>Missões</h4>
             <form action="" method="POST">
                 <div>
-                    <?php echo 'Existem ' . $totalQuest . ' Missões<br/>'; ?>
+<?php echo 'Existem ' . $totalQuest . ' Missões<br/>'; ?>
                     <label for="areas">Area:</label>
                     <select id="areas">
                         <option value="0">(0)Bellbroke Fort</option>
@@ -110,7 +116,7 @@ Implementar:
             <h4>Criaturas</h4>
             <form action="" method="POST">
                 <div>
-                    <?php echo 'Existem ' . $totalCriatura . 'Crituras<br/>'; ?>
+<?php echo 'Existem ' . $totalCriatura . 'Crituras<br/>'; ?>
                     <label for="c_nome">Nome da Criatura:</label>
                     <input type="text" id="c_nome" name="Nome da Criatura" maxlength="50" value="" /><br/>
                     <label for="c_evol"></label>
@@ -130,8 +136,8 @@ Implementar:
                         <option value="6">(6)Peixe</option>
                         <option value="7">(7)Crustáceo</option>
                         <option value="8">(8)Mulusculo</option>
-<!--                        <option value="9">(9)Deva</option>Futuro?
-                        <option value="10">(10)Mõr</option>Futuro?-->
+                        <!--                        <option value="9">(9)Deva</option>Futuro?
+                                                <option value="10">(10)Mõr</option>Futuro?-->
                     </select><br/>
                     <label for="c_vida">Vida Base:</label>
                     <input type="text" id="c_vida" name="Nome da Criatura" maxlength="50" value="" /><br/>
@@ -143,8 +149,8 @@ Implementar:
                         <option value="1">(1)Incomum</option>
                         <option value="2">(2)Raro</option>
                         <option value="3">(3)Lendário</option>
-<!--                        <option value="4">(4)Deva</option>Futuro?
-                        <option value="5">(5)Mõr</option>Futuro?-->
+                        <!--                        <option value="4">(4)Deva</option>Futuro?
+                                                <option value="5">(5)Mõr</option>Futuro?-->
                     </select>
                 </div>
                 <div><input type="submit" value="Addicionar" name="c_submit"/></div>
