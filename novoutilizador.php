@@ -17,12 +17,16 @@ and open the template in the editor.
                 <div>Username:<input type="text" name="username" value="" /></div>
                 <div>Password:<input type="password" name="password" value="" /></div>
                 <div>Email:<input type="text" name="email" value="" /></div>
-                <div><input type="submit" value="Registar" name="submit"/></div>
+                <div>Nome Cidade:<input type="text" name="cidade" value="" /></div>
+                <div><input type="submit" value="Registar" name="submit" /></div>
             </form>
         </div>
         <?php
                 if ($_GET['false'] == 1) {
-                    echo 'Email ou Username já registado!';
+                    echo 'Obrigatório Preencher todos os campos!';
+                }
+                elseif ($_GET['false'] == 2) {
+                    echo 'Erro ao criar o seu registo. Tente novamente!';
                 }
                 ?>
         <div>

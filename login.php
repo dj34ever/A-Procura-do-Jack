@@ -6,10 +6,10 @@ $erro = "Utilizador ou Palavra Passe incorrecta.";
 
 
 if (isset($_POST['submit'])) {
-    if (!isset($_POST['username'])) {
-        die(printf("Campo Utilizador não preenchido"));
-    } elseif (!isset($_POST['password'])) {
-        die(printf("Campo Password não preenchido"));
+    if (empty($_POST['username'])) {
+        die(header('Location: main.php?false=1'));
+    } elseif (empty($_POST['password'])) {
+        die(header('Location: main.php?false=1'));
     }
 
     $username = mysqli_escape_string($dbConn, $_POST['username']);
@@ -24,6 +24,7 @@ if (isset($_POST['submit'])) {
     if (mysqli_num_rows($query)) { // The user name and email address are correct
         session_start();
         $_SESSION['utilizador_nome'] = $username;
+       
         header('Location: game.php');
     } else {
           

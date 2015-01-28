@@ -1,8 +1,9 @@
 <?php
 session_start();
 require ('action.php');
-if (!isset($_SESSION['utilizador_nome']))
+if (!isset($_SESSION['utilizador_nome'])) {
     die(header('Location: logout.php'));
+}
 ?>
 <!DOCTYPE html>
 <html>
