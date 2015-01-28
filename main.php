@@ -33,6 +33,11 @@ and open the template in the editor.
                 if ($_GET['false'] == 1) {
                     echo 'Utilizador ou Palavra passe Errada';
                 }
+                
+                $a="ola mundo";
+                $b="Mundo novo";
+                echo ($a . $b);
+                
                 ?>
             </div>
         <?php } 

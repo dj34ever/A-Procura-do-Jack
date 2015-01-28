@@ -2,8 +2,11 @@
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+$message = "wrong answer";
+//echo "<script type='text/javascript'>alert('$message');</script>";
 
-require("config.php");
+require("action.php");
+//require("config.php");
 $erro = "Utilizador ou Palavra Passe incorrecta.";
 $ativo = 1;
 $moedas = 100000;
@@ -20,8 +23,8 @@ if (isset($_POST['submit'])) {
     } elseif (empty($_POST['email'])) {
         die(header('Location: novoutilizador.php?false=1'));
     }
-
-    //$username = mysqli_escape_string($dbConn, $_POST['username']);
+    echo "<script type='text/javascript'>alert('$message');</script>";
+    
     $username = mysqli_escape_string($dbConn, $_POST['username']);
 
     $email = mysqli_escape_string($dbConn, $_POST['email']);
@@ -33,34 +36,34 @@ if (isset($_POST['submit'])) {
         $cidade = "Nova Cidade";
     }
 
-
     if (!($username === null || $email === null || $password === null)) {
-//        if(!is_null($username) && !is_null($email) && !is_null($password)) //problemático
-        //$sql2 = "INSERT INTO `david_dicas`.`cidade` (`id`, `nome`, `id_utilizador`) VALUES (NULL, 'Cidade dos Mortos', '27');"
-
-        $sql = "SELECT id FROM utilizador WHERE username = '" . $username . "' LIMIT 1";//Seleciona user com o mesmo nome
+        $sql = "SELECT id FROM utilizador WHERE username = '" . $username . "' LIMIT 1"; //Seleciona user com o mesmo nome
         $query1 = mysqli_query($dbConn, $sql);
-        mysqli_close($dbConn);
-        
-        if (mysqli_num_rows($query)) { // Se existirem
+
+        if (mysqli_num_rows($query1) > 0) { // Se existir termina
             die(header('Location: novoutilizador.php?false=3'));
         }
-        
-            $sql = "INSERT INTO utilizador (username, password, email, moedas, ouro, ativa) VALUES ('" . $username . "', '" . $password . "', '" . $email . "', '" . $moedas . "', '" . $ouro . "', '" . $ativo . "')";
-            $query2 = mysqli_query($dbConn, $sql);
-
-            if ($query2) { // The user name and email address are correct
-                session_start();
-                $_SESSION['utilizador_nome'] = $username;
-                getuservalues();
-                $sql = "INSERT INTO cidade (nome, id_utilizador) VALUES ('" . $cidade . "', '" . $_SESSION['utilizador_id'] . "')";
-                $query = mysqli_query($dbConn, $sql);
+        //cria o utilizador
+        $sql = "INSERT INTO utilizador (username, password, email, moedas, ouro, ativa) VALUES ('" . $username . "', '" . $password . "', '" . $email . "', '" . $moedas . "', '" . $ouro . "', '" . $ativo . "')";
+        $query = mysqli_query($dbConn, $sql);
+       
+        if ($query) { // Se criado com sucesso
+            session_start();
+            $_SESSION['utilizador_nome'] = $username;
+            getuservalues();
+            $sql = "INSERT INTO cidade (nome, id_utilizador) VALUES ('" . $cidade . "', '" . $_SESSION['utilizador_id'] . "')";
+            $query = mysqli_query($dbConn, $sql);
+            $_SESSION['cidade_nome'] = $cidade;
+            if ($query) {
                 header('Location: game.php');
             } else {
-                die(header('Location: novoutilizador.php?false=4'));
+                die(header('Location: novoutilizador.php?false=2'));
             }
         } else {
-            die(header('Location: novoutilizador.php?false=4'));
+            die(header('Location: novoutilizador.php?false=7&'));
         }
+    } else {
+        die(header('Location: novoutilizador.php?false=1'));
     }
+}
 ?>
