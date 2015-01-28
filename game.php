@@ -17,15 +17,21 @@ if (!isset($_SESSION['utilizador_nome'])) {
          <!-- <script type="text/javascript" src="js/mt.js" ></script> -->
         <script type="text/javascript">
             window.addEvent('domready', function () {
+               
+               //tooltip
+                 var Tips1 = new Tips($$('.Tips1'));
+        
+        
+                 //drag-drop
                 var fx = [];
-
+                
                 $$('#draggables div').each(function (drag) {
                     new Drag.Move(drag, {
                         droppables: $$('#droppables div')
                     });
 
                     drag.addEvent('emptydrop', function () {
-                        this.setStyle('background-color', '#faec8f');
+                        //this.setStyle('background-color', '#faec8f');
                     });
                 });
 
@@ -33,16 +39,19 @@ if (!isset($_SESSION['utilizador_nome'])) {
                     fx[index] = drop.effects({transition: Fx.Transitions.Back.easeOut});
                     drop.addEvents({
                         'over': function (el, obj) {
-                            this.setStyle('background-color', '#78ba91');
+                            this.setStyle('background-color', '#1d1d20');
                         },
                         'leave': function (el, obj) {
-                            this.setStyle('background-color', '#1d1d20');
+                            //this.setStyle('background-color', '#1d1d20');
+                            this.setStyle('background-color', '');
+
                         },
                         'drop': function (el, obj) {
                             el.remove();
                             fx[index].start({
-                                'height': this.getStyle('height').toInt() + 30,
-                                'background-color': ['#78ba91', '#1d1d20']
+                                //  'height': this.getStyle('height').toInt() + 30,
+                                //'background-color': ['#78ba91', '#1d1d20']
+                                //Chamar funcção construir
                             });
                         }
                     });
@@ -70,26 +79,20 @@ if (!isset($_SESSION['utilizador_nome'])) {
                 <div id="g-map">
 
                     <div id="droppables">
-                        <div class="drop"></div>
-                        <div class="drop"></div>
-                        <div class="drop"></div>
-                        <div class="drop"></div>
-                        <div class="drop"></div>
-                        <div class="drop"></div>
+                        <div id="p1" class="drop"><img src="images/h_base.png" /></div>
+                        <div id="p2" class="drop"><img src="images/h_base.png" /></div>
+                        <div id="p3" class="drop"><img src="images/h_base.png" /></div>
+                        <div id="p4" class="drop"><img src="images/h_base.png" /></div>
+                        <div id="p5" class="drop"><img src="images/h_base.png" /></div>
                     </div>
                 </div>
-                <div id="gm-window" class="inline">
+                <div id="gm-window">
+                    Edificio Disponiveis
                     <div id="draggables">
-                        <div class="drag"></div>
-                        <div class="drag"></div>
-                        <div class="drag"></div>
-                        <div class="drag"></div>
-                        <div class="drag"></div>
-                        <div class="drag"></div>
-                        <div class="drag"></div>
-                        <div class="drag"></div>
-                        <div class="drag"></div>
-                        <div class="drag"></div>
+                        
+                        <div id="c1" class="drag"><img src="images/h_1a.png" class="Tips1" title="Casa 1 :: Utilizador <?php echo $_SESSION['utilizador_id']; ?>" /></div>
+                        <div id="c2" class="drag"><img src="images/h_1b.png" class="Tips1" title="Casa 2 :: Cidade <?php echo $_SESSION['cidade_id']; ?>" /></div>
+                        <div id="c3" class="drag"><img src="images/ph_casa_ev0_96w.png" class="Tips1" title="Casa 3 :: Utilizador <?php echo $_SESSION['utilizador_id']; ?>" /></div>
                     </div>
                 </div>
 
