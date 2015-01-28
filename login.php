@@ -19,6 +19,10 @@ if (isset($_POST['submit'])) {
     $sql = "SELECT id FROM utilizador WHERE username = '" . $username . "' AND password = '" . $password . "' LIMIT 1";
    //$sql = "SELECT id FROM utilizador WHERE username = '$username' AND password = '$password' LIMIT 1";
 
+    // criar insert cidade aqui!!!
+    
+    
+    
     $query = mysqli_query($dbConn, $sql);
     mysqli_close($dbConn);
     if (mysqli_num_rows($query)) { // The user name and email address are correct
@@ -27,10 +31,9 @@ if (isset($_POST['submit'])) {
        
         header('Location: game.php');
     } else {
-          
-        die(header('Location: main.php?false=1'));    
+        die(header('Location: main.php?false=2'));    
     }
 }
-else die(header('Location: main.php?false=1'));
+else die(header('Location: main.php?false=3'));
 ?>
  
