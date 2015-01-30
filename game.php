@@ -18,16 +18,14 @@ if (!isset($_SESSION['utilizador_nome'])) {
         <link rel="stylesheet" href="/resources/demos/style.css">
         <script>
             $(function () {
-                
                 $(".drags").draggable({revert: "invalid"});
                 $(".drops").droppable({
                     activeClass: "ui-state-default",
                     hoverClass: "ui-state-hover",
                     drop: function (event, ui) {
                         $(this)
-                                .addClass("ui-state-highlight")
-                                .find("p")
-                                .html("Dropped!");
+                                    .addClass("ui-state-highlight")
+                                    .append("<p>Dropped!</p>");
                     }
                 });
             });
