@@ -13,7 +13,25 @@ if (!isset($_SESSION['utilizador_nome'])) {
 
         <link rel="stylesheet" media="screen" type="text/css" href="css/game.css" />
         <title>Jack Search</title>
-
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script>
+            $(function () {
+                
+                $(".drags").draggable({revert: "invalid"});
+                $(".drops").droppable({
+                    activeClass: "ui-state-default",
+                    hoverClass: "ui-state-hover",
+                    drop: function (event, ui) {
+                        $(this)
+                                .addClass("ui-state-highlight")
+                                .find("p")
+                                .html("Dropped!");
+                    }
+                });
+            });
+        </script>
 
     </head>
     <body>
