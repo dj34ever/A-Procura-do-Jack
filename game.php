@@ -13,52 +13,6 @@ if (!isset($_SESSION['utilizador_nome'])) {
 
         <link rel="stylesheet" media="screen" type="text/css" href="css/game.css" />
         <title>Jack Search</title>
-        <script type="text/javascript" src="http://demos111.mootools.net/demos/mootools.svn.js"></script> 
-         <!-- <script type="text/javascript" src="js/mt.js" ></script> -->
-        <script type="text/javascript">
-            window.addEvent('domready', function () {
-               
-               //tooltip
-                 var Tips1 = new Tips($$('.Tips1'));
-        
-        
-                 //drag-drop
-                var fx = [];
-                
-                $$('#draggables div').each(function (drag) {
-                    new Drag.Move(drag, {
-                        droppables: $$('#droppables div')
-                    });
-
-                    drag.addEvent('emptydrop', function () {
-                        //this.setStyle('background-color', '#faec8f');
-                    });
-                });
-
-                $$('#droppables div').each(function (drop, index) {
-                    fx[index] = drop.effects({transition: Fx.Transitions.Back.easeOut});
-                    drop.addEvents({
-                        'over': function (el, obj) {
-                            this.setStyle('background-color', '#1d1d20');
-                        },
-                        'leave': function (el, obj) {
-                            //this.setStyle('background-color', '#1d1d20');
-                            this.setStyle('background-color', '');
-
-                        },
-                        'drop': function (el, obj) {
-                            el.remove();
-                            fx[index].start({
-                                //  'height': this.getStyle('height').toInt() + 30,
-                                //'background-color': ['#78ba91', '#1d1d20']
-                                //Chamar funcção construir
-                            });
-                        }
-                    });
-                });
-
-            });
-        </script>
 
 
     </head>
@@ -77,22 +31,22 @@ if (!isset($_SESSION['utilizador_nome'])) {
         <div id="content" >
             <div id="g-window">
                 <div id="g-map">
-
-                    <div id="droppables">
-                        <div id="p1" class="drop"><img src="images/h_base.png" /></div>
-                        <div id="p2" class="drop"><img src="images/h_base.png" /></div>
-                        <div id="p3" class="drop"><img src="images/h_base.png" /></div>
-                        <div id="p4" class="drop"><img src="images/h_base.png" /></div>
-                        <div id="p5" class="drop"><img src="images/h_base.png" /></div>
+                    <div id="droppables" >
+                        <span id="p1" class="drops"><img src="images/h_base.png" /></span>
+                        <span id="p2" class="drops"><img src="images/h_base.png" /></span>
+                        <span id="p3" class="drops"><img src="images/h_base.png" /></span>
+                        <span id="p4" class="drops"><img src="images/h_base.png" /></span>
+                        <span id="p5" class="drops"><img src="images/h_base.png" /></span>
                     </div>
                 </div>
                 <div id="gm-window">
                     Edificio Disponiveis
-                    <div id="draggables">
-                        
-                        <div id="c1" class="drag"><img src="images/h_1a.png" class="Tips1" title="Casa 1 :: Utilizador <?php echo $_SESSION['utilizador_id']; ?>" /></div>
-                        <div id="c2" class="drag"><img src="images/h_1b.png" class="Tips1" title="Casa 2 :: Cidade <?php echo $_SESSION['cidade_id']; ?>" /></div>
-                        <div id="c3" class="drag"><img src="images/ph_casa_ev0_96w.png" class="Tips1" title="Casa 3 :: Utilizador <?php echo $_SESSION['utilizador_id']; ?>" /></div>
+                    <div id="draggables" >
+                        <span id="ed1" class="drags"><img src="images/h_1a.png" /></span>
+                        <span id="ed2" class="drags"><img src="images/h_1b.png" /></span>
+                        <span id="ed3" class="drags"><img src="images/ph_casa_ev0_96w.png" /></span>
+                        <span id="ed4" class="drags"><img src="images/ph_casa_ev0_96w.png" /></span>
+                        <span id="ed5" class="drags"><img src="images/ph_casa_ev0_96w.png" /></span>
                     </div>
                 </div>
 

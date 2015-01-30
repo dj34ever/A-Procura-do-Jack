@@ -65,7 +65,7 @@ if (isset($_POST['submit'])) {
                 die(header('Location: novoutilizador.php?false=2'));
             }
         } else {
-            die(header('Location: novoutilizador.php?false=7&'));
+            die(header('Location: novoutilizador.php?false=7'));
         }
     } else {
         die(header('Location: novoutilizador.php?false=1'));
