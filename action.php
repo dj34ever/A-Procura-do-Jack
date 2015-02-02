@@ -28,4 +28,19 @@ function getuservalues() {
     //mysqli_close($GLOBALS['dbConn']);
 }
 
+function getavailablebuildings(){
+    if (!isset($_SESSION['utilizador_nome'])) {
+        die(header('Location: logout.php'));
+    }
+    $sql = "SELECT * FROM 'edificio'";
+    $query = mysqli_query($GLOBALS['dbConn'], $sql);
+    $result = mysqli_fetch_assoc($query);
+    $_SESSION['edificios_disponiveis']=$result;
+}
+
+function inseriredificio($id, $posicao){
+    
+    
+    
+}
 ?>

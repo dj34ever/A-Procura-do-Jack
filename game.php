@@ -17,6 +17,7 @@ if (!isset($_SESSION['utilizador_nome'])) {
         <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
         <link rel="stylesheet" href="/resources/demos/style.css">
         <script>
+            
             $(function () {
                 $(".drags").draggable({revert: "invalid"});
                 $(".drops").droppable({
@@ -24,9 +25,12 @@ if (!isset($_SESSION['utilizador_nome'])) {
                     hoverClass: "ui-state-hover",
                     drop: function (event, ui) {
                         $(this)
-                                    .addClass("ui-state-highlight")
-                                    .append("<p>Dropped!</p>");
+                                .append("<p>Dropped!</p>")
+                                .addClass("ui-state-highlight");
+                                alert(this.id);//posicao
+                                alert($(ui.draggable).attr("id"));  //edificio      
                     }
+
                 });
             });
         </script>
