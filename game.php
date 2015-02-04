@@ -32,11 +32,17 @@ if (!isset($_SESSION['utilizador_nome'])) {
                     drop: function (event, ui) {
                         $(this)
                                 .append("<p>Dropped!</p>")
+                                //.load("action.php",{pos: this.id, id: $(ui.draggable).attr("id")});
                                 .addClass("ui-state-highlight");
+                        var p = this.id.slice(1);//posicao
+                        // alert(p); 
 
-                        alert(this.id); //posicao
-                        alert($(ui.draggable).attr("id")); //edificio
-                        $.post("action.php", {pos: this.id, id: $(ui.draggable).attr("id")});
+                        var ed = $(ui.draggable).attr("id").slice(2);//edificio
+                        //    alert(ed); 
+                        $.post("construir.php", {pos: p, id: ed}, function (op) {
+                            //alert(op);
+                            location.reload();
+                        });
                     }
                 });
 
@@ -66,9 +72,9 @@ if (!isset($_SESSION['utilizador_nome'])) {
                         foreach ($_SESSION['edificios_construidos'] as $edificios)
                         {
                             echo"<span id=p" . $edificios['pos'] . " class=drops><img src=" . $edificios['img'] . " /></span>";
-                        } 
+                        }
                         ?>
-                       
+
                     </div>
                 </div>
                 <div id="gm-window">
@@ -76,8 +82,8 @@ if (!isset($_SESSION['utilizador_nome'])) {
                     <div id="draggables" >
                         <?php
                         getallbuildings();
-                        foreach ($_SESSION['edificios_disponiveis'] as $edificios) {
-                            echo"<span id=ed" . $edificios['id'] . " class=drags><img src=" . $edificios['img'] . " /></span>";
+                        foreach ($_SESSION['edificios_disponiveis'] as $row){
+                           echo"<span id=ed" . $row['id'] . " class=drags><img src=" . $row['img'] . " /></span>";
                         }
                         ?>
                     </div>
@@ -86,25 +92,25 @@ if (!isset($_SESSION['utilizador_nome'])) {
             </div>
             <div id="g-window2">
                 <div id="g-info">
-<?php
-getuservalues(); //preenche o $_SESSION com os dados do user
-/* VOCABULARIO */
-$v_user = "Jogador: ";
-$v_cidade = "Atualmente em: ";
-$v_ouro = "Ouro: ";
-$v_nota = "Notas: ";
+                    <?php
+                    getuservalues(); //preenche o $_SESSION com os dados do user
+                    /* VOCABULARIO */
+                    $v_user = "Jogador: ";
+                    $v_cidade = "Atualmente em: ";
+                    $v_ouro = "Ouro: ";
+                    $v_nota = "Notas: ";
 
-/* VALORES */
-$username = $_SESSION['utilizador_nome'];
-$cidade = $_SESSION['cidade_nome'];
-$moedas = $_SESSION['utilizador_moedas'];
-$ouro = $_SESSION['utilizador_ouro'];
+                    /* VALORES */
+                    $username = $_SESSION['utilizador_nome'];
+                    $cidade = $_SESSION['cidade_nome'];
+                    $moedas = $_SESSION['utilizador_moedas'];
+                    $ouro = $_SESSION['utilizador_ouro'];
 
-echo "<div><p>" . $v_user . $username . "</p></div>"
- . "<div><p>" . $v_cidade . $cidade . "</p></div>"
- . "<div><p>" . $v_ouro . $ouro . "</p></div>"
- . "<div><p>" . $v_nota . $moedas . "</p></div>";
-?>
+                    echo "<div><p>" . $v_user . $username . "</p></div>"
+                    . "<div><p>" . $v_cidade . $cidade . "</p></div>"
+                    . "<div><p>" . $v_ouro . $ouro . "</p></div>"
+                    . "<div><p>" . $v_nota . $moedas . "</p></div>";
+                    ?>
                 </div>
                 <div id="dica">
                     <div>
