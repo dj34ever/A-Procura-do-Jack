@@ -22,7 +22,7 @@
                     <div>Password:<input type="password" name="password" value="" /></div>
                     <div>
                         <input type="submit" value="Login" name="submit" />
-                        <span><input type="button" value="Registar" onclick="window.open('novoutilizador.php')" /></span>
+                        <span><input type="button" value="Registar" onclick="window.location.href= 'novoutilizador.php'" /></span>
                     </div>
                 </form>
                 <?php

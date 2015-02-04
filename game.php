@@ -1,4 +1,8 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
 session_start();
 require ('action.php');
 if (!isset($_SESSION['utilizador_nome'])) {
@@ -10,14 +14,16 @@ if (!isset($_SESSION['utilizador_nome'])) {
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-
         <link rel="stylesheet" media="screen" type="text/css" href="css/game.css" />
         <title>Jack Search</title>
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
         <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
         <link rel="stylesheet" href="/resources/demos/style.css">
+
+
         <script>
-            
+
+            //Função drag/drop
             $(function () {
                 $(".drags").draggable({revert: "invalid"});
                 $(".drops").droppable({
@@ -27,16 +33,19 @@ if (!isset($_SESSION['utilizador_nome'])) {
                         $(this)
                                 .append("<p>Dropped!</p>")
                                 .addClass("ui-state-highlight");
-                                alert(this.id);//posicao
-                                alert($(ui.draggable).attr("id"));  //edificio      
-                    }
 
+                        alert(this.id); //posicao
+                        alert($(ui.draggable).attr("id")); //edificio
+                        $.post("action.php", {pos: this.id, id: $(ui.draggable).attr("id")});
+                    }
                 });
+
             });
         </script>
 
     </head>
     <body>
+
         <div id="top" >
             <div id="header">
                 <img src="images/draco_ico_temp.png" alt="Procura o Jack" />
@@ -52,46 +61,50 @@ if (!isset($_SESSION['utilizador_nome'])) {
             <div id="g-window">
                 <div id="g-map">
                     <div id="droppables" >
-                        <span id="p1" class="drops"><img src="images/h_base.png" /></span>
-                        <span id="p2" class="drops"><img src="images/h_base.png" /></span>
-                        <span id="p3" class="drops"><img src="images/h_base.png" /></span>
-                        <span id="p4" class="drops"><img src="images/h_base.png" /></span>
-                        <span id="p5" class="drops"><img src="images/h_base.png" /></span>
+                        <?php
+                        getconstructedbuildings();
+                        foreach ($_SESSION['edificios_construidos'] as $edificios)
+                        {
+                            echo"<span id=p" . $edificios['pos'] . " class=drops><img src=" . $edificios['img'] . " /></span>";
+                        } 
+                        ?>
+                       
                     </div>
                 </div>
                 <div id="gm-window">
                     Edificio Disponiveis
                     <div id="draggables" >
-                        <span id="ed1" class="drags"><img src="images/h_1a.png" /></span>
-                        <span id="ed2" class="drags"><img src="images/h_1b.png" /></span>
-                        <span id="ed3" class="drags"><img src="images/ph_casa_ev0_96w.png" /></span>
-                        <span id="ed4" class="drags"><img src="images/ph_casa_ev0_96w.png" /></span>
-                        <span id="ed5" class="drags"><img src="images/ph_casa_ev0_96w.png" /></span>
+                        <?php
+                        getallbuildings();
+                        foreach ($_SESSION['edificios_disponiveis'] as $edificios) {
+                            echo"<span id=ed" . $edificios['id'] . " class=drags><img src=" . $edificios['img'] . " /></span>";
+                        }
+                        ?>
                     </div>
                 </div>
 
             </div>
             <div id="g-window2">
                 <div id="g-info">
-                    <?php
-                    getuservalues(); //preenche o $_SESSION com os dados do user
-                    /* VOCABULARIO */
-                    $v_user = "Jogador: ";
-                    $v_cidade = "Atualmente em: ";
-                    $v_ouro = "Ouro: ";
-                    $v_nota = "Notas: ";
+<?php
+getuservalues(); //preenche o $_SESSION com os dados do user
+/* VOCABULARIO */
+$v_user = "Jogador: ";
+$v_cidade = "Atualmente em: ";
+$v_ouro = "Ouro: ";
+$v_nota = "Notas: ";
 
-                    /* VALORES */
-                    $username = $_SESSION['utilizador_nome'];
-                    $cidade = $_SESSION['cidade_nome'];
-                    $moedas = $_SESSION['utilizador_moedas'];
-                    $ouro = $_SESSION['utilizador_ouro'];
+/* VALORES */
+$username = $_SESSION['utilizador_nome'];
+$cidade = $_SESSION['cidade_nome'];
+$moedas = $_SESSION['utilizador_moedas'];
+$ouro = $_SESSION['utilizador_ouro'];
 
-                    echo "<div><p>" . $v_user . $username . "</p></div>"
-                    . "<div><p>" . $v_cidade . $cidade . "</p></div>"
-                    . "<div><p>" . $v_ouro . $ouro . "</p></div>"
-                    . "<div><p>" . $v_nota . $moedas . "</p></div>";
-                    ?>
+echo "<div><p>" . $v_user . $username . "</p></div>"
+ . "<div><p>" . $v_cidade . $cidade . "</p></div>"
+ . "<div><p>" . $v_ouro . $ouro . "</p></div>"
+ . "<div><p>" . $v_nota . $moedas . "</p></div>";
+?>
                 </div>
                 <div id="dica">
                     <div>
