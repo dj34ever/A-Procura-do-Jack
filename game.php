@@ -5,7 +5,10 @@ ini_set('display_errors', 1);
 
 session_start();
 require ('action.php');
-if (!isset($_SESSION['utilizador_nome'])) {
+
+//require ('./construir.php');
+
+if (!isset($_SESSION['utilizador']['nome'])) {
     die(header('Location: logout.php'));
 }
 ?>
@@ -22,7 +25,7 @@ if (!isset($_SESSION['utilizador_nome'])) {
 
 
         <script>
-
+            var tempo = 0;
             //Função drag/drop
             $(function () {
                 $(".drags").draggable({revert: "invalid"});
@@ -30,8 +33,9 @@ if (!isset($_SESSION['utilizador_nome'])) {
                     activeClass: "ui-state-default",
                     hoverClass: "ui-state-hover",
                     drop: function (event, ui) {
+
                         $(this)
-                                .append("<p>Dropped!</p>")
+                                .append("<p>" + tempo + "</p>")
                                 //.load("action.php",{pos: this.id, id: $(ui.draggable).attr("id")});
                                 .addClass("ui-state-highlight");
                         var p = this.id.slice(1);//posicao
@@ -40,10 +44,12 @@ if (!isset($_SESSION['utilizador_nome'])) {
                         var ed = $(ui.draggable).attr("id").slice(2);//edificio
                         //    alert(ed); 
                         $.post("construir.php", {pos: p, id: ed}, function (op) {
-                            //alert(op);
+                            tempo = op;
+                            alert(op);
                             location.reload();
                         });
                     }
+
                 });
 
             });
@@ -69,8 +75,7 @@ if (!isset($_SESSION['utilizador_nome'])) {
                     <div id="droppables" >
                         <?php
                         getconstructedbuildings();
-                        foreach ($_SESSION['edificios_construidos'] as $edificios)
-                        {
+                        foreach ($_SESSION['edificio_cidade'] as $edificios) {
                             echo"<span id=p" . $edificios['pos'] . " class=drops><img src=" . $edificios['img'] . " /></span>";
                         }
                         ?>
@@ -82,8 +87,8 @@ if (!isset($_SESSION['utilizador_nome'])) {
                     <div id="draggables" >
                         <?php
                         getallbuildings();
-                        foreach ($_SESSION['edificios_disponiveis'] as $row){
-                           echo"<span id=ed" . $row['id'] . " class=drags><img src=" . $row['img'] . " /></span>";
+                        foreach ($_SESSION['edificio'] as $row) {
+                            echo"<span id=ed" . $row['id'] . " class=drags><img src=" . $row['img'] . " /></span>";
                         }
                         ?>
                     </div>
@@ -101,10 +106,10 @@ if (!isset($_SESSION['utilizador_nome'])) {
                     $v_nota = "Notas: ";
 
                     /* VALORES */
-                    $username = $_SESSION['utilizador_nome'];
-                    $cidade = $_SESSION['cidade_nome'];
-                    $moedas = $_SESSION['utilizador_moedas'];
-                    $ouro = $_SESSION['utilizador_ouro'];
+                    $username = $_SESSION['utilizador']['nome'];
+                    $cidade = $_SESSION['cidade']['nome'];
+                    $moedas = $_SESSION['utilizador']['moedas'];
+                    $ouro = $_SESSION['utilizador']['ouro'];
 
                     echo "<div><p>" . $v_user . $username . "</p></div>"
                     . "<div><p>" . $v_cidade . $cidade . "</p></div>"

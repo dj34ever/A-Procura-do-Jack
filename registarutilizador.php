@@ -50,16 +50,16 @@ if (isset($_POST['submit'])) {
         if ($query) {
             session_start();
             //Armazena o nome do user
-            $_SESSION['utilizador_nome'] = $username;
+            $_SESSION['utilizador']['nome'] = $username;
             //Armazena os restantes valores
             getuservalues();
             //Cria a cidade
-            $sql = "INSERT INTO cidade (nome, id_utilizador) VALUES ('" . $cidade . "', '" . $_SESSION['utilizador_id'] . "')";
+            $sql = "INSERT INTO cidade (nome, id_utilizador) VALUES ('" . $cidade . "', '" . $_SESSION['utilizador']['id'] . "')";
             $query = mysqli_query($dbConn, $sql);
-            $_SESSION['cidade_nome'] = $cidade;
+            $_SESSION['cidade']['nome'] = $cidade;
             
             if ($query) {
-                $sql = "SELECT id from cidade where id_utilizador=" . $_SESSION['utilizador_id'];
+                $sql = "SELECT id from cidade where id_utilizador=" . $_SESSION['utilizador']['id'];
                 $query = mysqli_query($dbConn, $sql);
                 $result = mysqli_fetch_assoc($query);
                 for ($i = 1; $i <= 5; $i++) {

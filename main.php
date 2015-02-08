@@ -15,7 +15,7 @@
         </div>
         <div> 
             <?php
-            if (!isset($_SESSION['utilizador_nome'])) {
+            if (!isset($_SESSION['utilizador']['nome'])) {
                 ?>
                 <form name="login" action="login.php" method="POST">
                     <div>Username:<input type="text" name="username" value="" /></div>
