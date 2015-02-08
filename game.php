@@ -25,7 +25,7 @@ if (!isset($_SESSION['utilizador']['nome'])) {
 
 
         <script>
-            var tempo = 0;
+
             //Função drag/drop
             $(function () {
                 $(".drags").draggable({revert: "invalid"});
@@ -33,21 +33,19 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                     activeClass: "ui-state-default",
                     hoverClass: "ui-state-hover",
                     drop: function (event, ui) {
-
-                        $(this)
-                                .append("<p>" + tempo + "</p>")
-                                //.load("action.php",{pos: this.id, id: $(ui.draggable).attr("id")});
-                                .addClass("ui-state-highlight");
+               
+                        $(this).addClass("ui-state-highlight");
                         var p = this.id.slice(1);//posicao
-                        // alert(p); 
-
                         var ed = $(ui.draggable).attr("id").slice(2);//edificio
-                        //    alert(ed); 
                         $.post("construir.php", {pos: p, id: ed}, function (op) {
+                            
                             tempo = op;
-                            alert(op);
-                            location.reload();
+                            alert(tempo);
+                         location.reload();
+                            
+                            
                         });
+                           
                     }
 
                 });

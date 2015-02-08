@@ -33,7 +33,12 @@ if (!(empty($id) || empty($pos))) {
         $edificio_futuro=$_SESSION['edificio'][$id];
         $tempo_construcao = time() + $edificio_futuro['tempo_construcao'];
         $edifio_atual['tempo_construcao_final'] = $tempo_construcao;
+        //define construcao
         $sql = "Update edificio_cidade set tempo_construcao_final=$tempo_construcao, id_edificio_construcao=$id where id_cidade=$cidade and pos=$pos";
+        $query = mysqli_query($GLOBALS['dbConn'], $sql);
+        //desconta valor edificio
+        $dinheiro=  $_SESSION['utilizador']['moedas']-$edificio_futuro['preco'];
+        $sql= "Update utilizador set moedas=$dinheiro where id=".$_SESSION['utilizador']['id'];
         $query = mysqli_query($GLOBALS['dbConn'], $sql);
         //echo "Comecou a construcao".($edifio_atual['tempo_construcao_final']-time());
         echo ($edifio_atual['tempo_construcao_final']-time());
