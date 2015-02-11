@@ -45,20 +45,36 @@ function getallbuildings() {
         unset($_SESSION['edificio']);
     }
 }
-
+function getfinishedbuildings(){
+     if (!isset($_SESSION['utilizador']['nome'])) {
+        die(header('Location: logout.php'));
+    }
+        //$edifio_atual['tempo_construcao_final'] = 0;
+        //$tempo_construcao = 0;
+    
+        $sql = "Update edificio_cidade set id_edificio=id_edificio_construcao, tempo_construcao_final=$tempo_construcao, id_edificio_construcao=NULL where id_cidade=$cidade and pos=$pos";
+        $query = mysqli_query($GLOBALS['dbConn'], $sql);
+        echo 0;
+    
+    
+}
 //obtem todos os edifios já contruidos na cidade
 function getconstructedbuildings() {
     if (!isset($_SESSION['utilizador']['nome'])) {
         die(header('Location: logout.php'));
     }
     getuservalues();
-    $sql = "SELECT ed.pos, ed.tempo_construcao_final, edi.img FROM edificio_cidade ed, edificio edi where ed.id_edificio=edi.id and ed.id_cidade=" . $_SESSION['cidade']['id'];
-
+    $sql = "SELECT ed.id, ed.pos, ed.tempo_construcao_final, edi.img FROM edificio_cidade ed, edificio edi where ed.id_edificio=edi.id and ed.id_cidade=" . $_SESSION['cidade']['id'];
     $query = mysqli_query($GLOBALS['dbConn'], $sql);
     
     if ($query) {
      unset($_SESSION['edificio_cidade']);
         while($row=mysqli_fetch_assoc($query)) {
+            if($row['tempo_construcao_final']<=time())
+            {
+                $sql= "Update edificio_cidade set id_edificio=id_edificio_construcao, tempo_construcao_final=0, id_edificio_construcao=NULL where id=".$row['id'];
+                mysqli_query($GLOBALS['dbConn'], $sql);
+            }
         $_SESSION['edificio_cidade'][]=$row; 
         } 
 

@@ -74,7 +74,8 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                         <?php
                         getconstructedbuildings();
                         foreach ($_SESSION['edificio_cidade'] as $edificios) {
-                            echo"<span id=p" . $edificios['pos'] . " class=drops><img src=" . $edificios['img'] . " /></span>";
+                            if(($edificios['tempo_construcao_final']-time())>0) { $tempo=$edificios['tempo_construcao_final']-time(); } else {$tempo=NULL;}
+                            echo"<span id=p" . $edificios['pos'] . " class=drops><img src=" . $edificios['img'] . " /><p>$tempo</p></span>";
                         }
                         ?>
 
