@@ -1,6 +1,6 @@
 <?php
 
-require ("config.php");
+require ("action.php");
 if(session_status()!= PHP_SESSION_ACTIVE){
     session_start();
     }
@@ -39,11 +39,11 @@ if (!(empty($id) || empty($pos))) {
         $dinheiro=  $_SESSION['utilizador']['moedas']-$edificio_futuro['preco'];
         if($dinheiro<=0) die("Notas Insuficientes");
         $sql= "Update utilizador set moedas=$dinheiro where id=".$_SESSION['utilizador']['id'];
-        $query = mysqli_query($GLOBALS['dbConn'], $sql);
+        $query = dbFetch($sql);
         
         //define construcao
         $sql = "Update edificio_cidade set tempo_construcao_final=$tempo_construcao, id_edificio_construcao=$id where id_cidade=$cidade and pos=$pos";
-        $query = mysqli_query($GLOBALS['dbConn'], $sql);
+        $query = dbFetch($sql);
 
         //echo "Comecou a construcao".($edifio_atual['tempo_construcao_final']-time());
         //echo ($edifio_atual['tempo_construcao_final']-time());

@@ -33,19 +33,18 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                     activeClass: "ui-state-default",
                     hoverClass: "ui-state-hover",
                     drop: function (event, ui) {
-               
+
                         $(this).addClass("ui-state-highlight");
                         var p = this.id.slice(1);//posicao
                         var ed = $(ui.draggable).attr("id").slice(2);//edificio
                         $.post("construir.php", {pos: p, id: ed}, function (op) {
                             
-                            tempo = op;
-                            alert(tempo);
-                         location.reload();
-                            
-                            
+                            //alert(op);
+                            location.reload();
+
+
                         });
-                           
+
                     }
 
                 });
@@ -74,11 +73,14 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                         <?php
                         getconstructedbuildings();
                         foreach ($_SESSION['edificio_cidade'] as $edificios) {
-                            if(($edificios['tempo_construcao_final']-time())>0) { $tempo=$edificios['tempo_construcao_final']-time(); } else {$tempo=NULL;}
+                            if (($edificios['tempo_construcao_final'] - time()) > 0) {
+                                $tempo = $edificios['tempo_construcao_final'] - time();
+                            } else {
+                                $tempo = NULL;
+                            }
                             echo"<span id=p" . $edificios['pos'] . " class=drops><img src=" . $edificios['img'] . " /><p>$tempo</p></span>";
                         }
                         ?>
-
                     </div>
                 </div>
                 <div id="gm-window">
