@@ -37,19 +37,13 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                         $(this).addClass("ui-state-highlight");
                         var p = this.id.slice(1);//posicao
                         var ed = $(ui.draggable).attr("id").slice(2);//edificio
-                        $.post("construir.php", {pos: p, id: ed}, function (op) {
-                            
-                            //alert(op);
+                        $.post("construir.php", {pos: p, id: ed}, function (timer) {
                             location.reload();
-
-
                         });
-
                     }
-
-                });
-
+                }); 
             });
+
         </script>
 
     </head>
@@ -74,11 +68,11 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                         getconstructedbuildings();
                         foreach ($_SESSION['edificio_cidade'] as $edificios) {
                             if (($edificios['tempo_construcao_final'] - time()) > 0) {
-                                $tempo = $edificios['tempo_construcao_final'] - time();
+                                $tempo = ($edificios['tempo_construcao_final'] - time())." S";
                             } else {
                                 $tempo = NULL;
                             }
-                            echo"<span id=p" . $edificios['pos'] . " class=drops><img src=" . $edificios['img'] . " /><p>$tempo</p></span>";
+                            echo"<span id=p" . $edificios['pos'] . " class=drops><img src=" . $edificios['img'] . " /><p class='tempo'>$tempo</p></span>";
                         }
                         ?>
                     </div>
@@ -89,7 +83,7 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                         <?php
                         getallbuildings();
                         foreach ($_SESSION['edificio'] as $row) {
-                            echo"<span id=ed" . $row['id'] . " class=drags><img src=" . $row['img'] . " /></span>";
+                            echo"<span id=ed" . $row['id'] . " class=drags><img src=" . $row['img'] . " /></span><span>".$row['preco']." N</span>";
                         }
                         ?>
                     </div>
