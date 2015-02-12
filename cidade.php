@@ -118,7 +118,7 @@ and open the template in the editor.
 
                         } // final action
                     });
-
+                       
                     myCounter.start();
 
                 }

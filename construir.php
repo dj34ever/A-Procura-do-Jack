@@ -46,7 +46,8 @@ if (!(empty($id) || empty($pos))) {
         $query = dbFetch($sql);
 
         //echo "Comecou a construcao".($edifio_atual['tempo_construcao_final']-time());
-        //echo ($edifio_atual['tempo_construcao_final']-time());
+      
+        echo ($edifio_atual['tempo_construcao_final']-time());
     }
 //completou o timer
 //    else {
