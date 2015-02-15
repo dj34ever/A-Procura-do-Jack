@@ -24,7 +24,7 @@ if (!isset($_SESSION['utilizador']['nome'])) {
         <script src="jquery/jquery-1.11.2.min.js" ></script>
         <script src="jquery/jquery-ui.js" ></script>
         <link rel="stylesheet" href="/resources/demos/style.css">
-
+        <link rel="stylesheet" href="jquery/jquery-ui.css">
 
         <script>
 
@@ -32,15 +32,21 @@ if (!isset($_SESSION['utilizador']['nome'])) {
             $(function () {
                 $(".drags").draggable({revert: "invalid"});
                 $(".drops").droppable({
-                    activeClass: "ui-state-default",
-                    hoverClass: "ui-state-hover",
+                    // activeClass: "ui-state-default",
+                    // hoverClass: "ui-state-hover",
                     drop: function (event, ui) {
-                        $(this).addClass("ui-state-highlight");
+                        // $(this).addClass("ui-state-highlight");
                         var p = this.id.slice(1);//posicao
                         var ed = $(ui.draggable).attr("id").slice(2);//edificio
-                        $.post("construir.php", {pos: p, id: ed}, function (timer) {
-                            location.reload();
-
+                        $.post("construir.php", {pos: p, id: ed}, function (msg) {
+                            $("<div>" + msg + "</div>").dialog({
+                                modal: true,
+                                buttons: {
+                                    Ok: function () {
+                                        location.reload();
+                                    }
+                                }
+                            });
                         });
                     }
                 });
@@ -94,12 +100,12 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                 <div id="gm-window">
                     Edificio Disponiveis
                     <div id="draggables" >
-<?php
-getallbuildings();
-foreach ($_SESSION['edificio'] as $row) {
-    echo"<span id=ed" . $row['id'] . " class=drags><img src=" . $row['img'] . " /></span><span>" . $row['preco'] . " N</span>";
-}
-?>
+                        <?php
+                        getallbuildings();
+                        foreach ($_SESSION['edificio'] as $row) {
+                            echo"<span id=ed" . $row['id'] . " class=drags><img src=" . $row['img'] . " /></span><span>" . $row['preco'] . " N</span>";
+                        }
+                        ?>
                     </div>
                 </div>
 

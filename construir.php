@@ -22,12 +22,16 @@ if (!(empty($id) || empty($pos))) {
     }
    //print_r($edifio_atual);
    //printf($id);
+   //
+   //
 //em contrucao
     if ($edifio_atual['tempo_construcao_final'] > time()) {
 //header('Location: game.php');
         //echo "Falta ".($edifio_atual['tempo_construcao_final']-time());
-        echo ($edifio_atual['tempo_construcao_final']-time());
+        //echo ($edifio_atual['tempo_construcao_final']-time());
+        echo "Área já em construção";
     }
+    
 // incia nova tarefa
     elseif ($edifio_atual['tempo_construcao_final'] == 0) {
         
@@ -45,9 +49,9 @@ if (!(empty($id) || empty($pos))) {
         $sql = "Update edificio_cidade set tempo_construcao_final=$tempo_construcao, id_edificio_construcao=$id where id_cidade=$cidade and pos=$pos";
         $query = dbFetch($sql);
 
-        //echo "Comecou a construcao".($edifio_atual['tempo_construcao_final']-time());
+        echo "Comecou a construcao";
       
-        echo ($edifio_atual['tempo_construcao_final']-time());
+      //  echo ($edifio_atual['tempo_construcao_final']-time());
     }
 //completou o timer
 //    else {
