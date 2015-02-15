@@ -19,8 +19,10 @@ if (!isset($_SESSION['utilizador']['nome'])) {
         <meta name="viewport" content="width=device-width, initial-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
         <link rel="stylesheet" media="screen" type="text/css" href="css/game.css" />
         <title>Jack Search</title>
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+        <!--<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>-->
+        <script src="jquery/jquery-1.11.2.min.js" ></script>
+        <script src="jquery/jquery-ui.js" ></script>
         <link rel="stylesheet" href="/resources/demos/style.css">
 
 
@@ -41,7 +43,12 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                             location.reload();
                         });
                     }
-                }); 
+                });
+            });
+            $(function () {
+                $("#progressbar").progressbar({
+                    value: 37
+                });
             });
 
         </script>
@@ -68,11 +75,12 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                         getconstructedbuildings();
                         foreach ($_SESSION['edificio_cidade'] as $edificios) {
                             if (($edificios['tempo_construcao_final'] - time()) > 0) {
-                                $tempo = ($edificios['tempo_construcao_final'] - time())." S";
+                                //$tempo = ($edificios['tempo_construcao_final'] - time())." S";
+                                $tempo = ($edificios['tempo_construcao_final'] - time());
                             } else {
-                                $tempo = NULL;
+                                $tempo = 0;
                             }
-                            echo"<span id=p" . $edificios['pos'] . " class=drops><img src=" . $edificios['img'] . " /><p class='tempo'>$tempo</p></span>";
+                            echo"<span id=p" . $edificios['pos'] . " class=drops ><img src=" . $edificios['img'] . " /><div id=\"progressbar\">$tempo</div></span>";
                         }
                         ?>
                     </div>
@@ -83,7 +91,7 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                         <?php
                         getallbuildings();
                         foreach ($_SESSION['edificio'] as $row) {
-                            echo"<span id=ed" . $row['id'] . " class=drags><img src=" . $row['img'] . " /></span><span>".$row['preco']." N</span>";
+                            echo"<span id=ed" . $row['id'] . " class=drags><img src=" . $row['img'] . " /></span><span>" . $row['preco'] . " N</span>";
                         }
                         ?>
                     </div>
