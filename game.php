@@ -35,22 +35,28 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                     activeClass: "ui-state-default",
                     hoverClass: "ui-state-hover",
                     drop: function (event, ui) {
-
                         $(this).addClass("ui-state-highlight");
                         var p = this.id.slice(1);//posicao
                         var ed = $(ui.draggable).attr("id").slice(2);//edificio
                         $.post("construir.php", {pos: p, id: ed}, function (timer) {
                             location.reload();
+
                         });
                     }
                 });
             });
-            $(function () {
-                $("#progressbar").progressbar({
-                    value: 37
-                });
-            });
-
+            //adiciona counter a edificios em construção
+            function temporizador(pos, tempo) {
+                //$(".drops").append("<p>"+tempo+"</p>");
+                //$(this).append("<p>"+tempo+"</p>");
+                if (tempo > 0)
+                    setInterval(function () {
+                        $(pos).find("p").html(tempo);
+                        tempo--;
+                        if (tempo < 0)
+                            location.reload();
+                    }, 1000);
+            }
         </script>
 
     </head>
@@ -80,7 +86,7 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                             } else {
                                 $tempo = 0;
                             }
-                            echo"<span id=p" . $edificios['pos'] . " class=drops ><img src=" . $edificios['img'] . " /><div id=\"progressbar\">$tempo</div></span>";
+                            echo"<span id=p" . $edificios['pos'] . " class=drops ><img src=" . $edificios['img'] . " /><p><script>temporizador(p" . $edificios['pos'] . ",$tempo);</script></p></span>";
                         }
                         ?>
                     </div>
@@ -88,12 +94,12 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                 <div id="gm-window">
                     Edificio Disponiveis
                     <div id="draggables" >
-                        <?php
-                        getallbuildings();
-                        foreach ($_SESSION['edificio'] as $row) {
-                            echo"<span id=ed" . $row['id'] . " class=drags><img src=" . $row['img'] . " /></span><span>" . $row['preco'] . " N</span>";
-                        }
-                        ?>
+<?php
+getallbuildings();
+foreach ($_SESSION['edificio'] as $row) {
+    echo"<span id=ed" . $row['id'] . " class=drags><img src=" . $row['img'] . " /></span><span>" . $row['preco'] . " N</span>";
+}
+?>
                     </div>
                 </div>
 
