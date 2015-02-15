@@ -10,9 +10,7 @@
     </head>
     <body>
         <div id="top">
-
             <a href="main.php"><h1><img src="images/draco_ico_temp.png" />À procura de Jack</h1></a>
-
         </div>
         <div> 
             <?php
@@ -23,19 +21,26 @@
                     <div>Password:<input type="password" name="password" value="" /></div>
                     <div>
                         <input type="submit" value="Login" name="submit" />
-                        <span><input type="button" value="Registar" onclick="window.location.href= 'novoutilizador.php'" /></span>
+                        <span><input type="button" value="Registar" onclick="window.location.href = 'novoutilizador.php'" /></span>
                     </div>
                 </form>
                 <?php
                 if ($_GET['false'] == 1) {
-                    echo 'Utilizador ou Palavra passe Errada';
+                    echo 'Utilizador ou Palavra Passe Incorrecto';
+                } elseif ($_GET['false'] == 2) {
+                    echo 'Já existe um Utilizador com o mesmo Username';
+                } elseif ($_GET['false'] == 3) {
+                    echo 'Ocorreu um erro desconhecido';
+                } elseif ($_GET['false'] == 4) {
+                    echo 'Preencha todos os Campos';
                 }
-                
                 ?>
             </div>
-        <?php } 
-        else header('Location: game.php');     
-        ?>
+            <?php
+            } else {
+                header('Location: game.php');
+            }
+            ?>
         <div>
 
         </div>

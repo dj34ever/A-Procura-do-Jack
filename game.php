@@ -1,12 +1,8 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-
-
 session_start();
 require ('action.php');
-
-//require ('./construir.php');
 
 if (!isset($_SESSION['utilizador']['nome'])) {
     die(header('Location: logout.php'));
@@ -43,7 +39,7 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                                 modal: true,
                                 buttons: {
                                     Ok: function () {
-                                        location.reload();
+                                        window.location.reload(true);
                                     }
                                 }
                             });
@@ -52,22 +48,19 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                 });
             });
             //adiciona counter a edificios em construção
+            //pos==posição (div no mapa), tempo==segundos ate terminar a construção
             function temporizador(pos, tempo) {
-                //$(".drops").append("<p>"+tempo+"</p>");
-                //$(this).append("<p>"+tempo+"</p>");
                 if (tempo > 0)
                     setInterval(function () {
-                        $(pos).find("p").html(tempo);
+                        $(pos).find("p").html(tempo + " S");
                         tempo--;
                         if (tempo < 0)
-                            location.reload();
+                            window.location.reload(true);
                     }, 1000);
             }
         </script>
-
     </head>
     <body>
-
         <div id="top" >
             <div id="header">
                 <img src="images/draco_ico_temp.png" alt="Procura o Jack" />
@@ -84,10 +77,12 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                 <div id="g-map">
                     <div id="droppables" >
                         <?php
+                        //obtem edificios construidos
                         getconstructedbuildings();
+                        //percorre cada edificio e verifica se existe algum em construcao
+                        //envia esse tempo para o javascript temporizador
                         foreach ($_SESSION['edificio_cidade'] as $edificios) {
                             if (($edificios['tempo_construcao_final'] - time()) > 0) {
-                                //$tempo = ($edificios['tempo_construcao_final'] - time())." S";
                                 $tempo = ($edificios['tempo_construcao_final'] - time());
                             } else {
                                 $tempo = 0;
@@ -101,9 +96,12 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                     Edificio Disponiveis
                     <div id="draggables" >
                         <?php
+                        //obtem todos os edificios disponiveis para construção
                         getallbuildings();
-                        foreach ($_SESSION['edificio'] as $row) {
-                            echo"<span id=ed" . $row['id'] . " class=drags><img src=" . $row['img'] . " /></span><span>" . $row['preco'] . " N</span>";
+                        if (!empty($_SESSION['edificio'])) {
+                            foreach ($_SESSION['edificio'] as $row) {
+                                echo"<span id=ed" . $row['id'] . " class=drags><img src=" . $row['img'] . " /></span><span>" . $row['preco'] . " N</span>";
+                            }
                         }
                         ?>
                     </div>
@@ -113,7 +111,8 @@ if (!isset($_SESSION['utilizador']['nome'])) {
             <div id="g-window2">
                 <div id="g-info">
                     <?php
-                    getuservalues(); //preenche o $_SESSION com os dados do user
+                    //preenche o $_SESSION com os dados do user
+                    getuservalues(); 
                     /* VOCABULARIO */
                     $v_user = "Jogador: ";
                     $v_cidade = "Atualmente em: ";
