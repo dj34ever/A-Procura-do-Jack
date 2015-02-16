@@ -1,11 +1,8 @@
 <?php
-
-require ('session.php');
+//require ('session.php');
+session_start();
 require ('action.php');
-
 //vocab.php
-
-
 //action.php
 //countAll($table)
 
@@ -33,12 +30,12 @@ Implementar:
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <?php
-        //Verifica se existe uma sessão iniciada
-        if (!isset($_SESSION['utilizador']['nome'])){
-            die(header('Location: logout.php'));
-        }
-        ?>
+<?php
+//Verifica se existe uma sessão iniciada
+if (!isset($_SESSION['utilizador']['nome'])) {
+    die(header('Location: logout.php'));
+}
+?>
         <div id="utilizador">
             <h4>Utilizador</h4>
             <form action="" method="POST">
@@ -63,14 +60,15 @@ Implementar:
             <h4>Edificios</h4>
             <form action="" method="POST">
                 <div>
-                    <?php //mensagem conta criada ou existe
-                        if($_GET['r']==0){
-                            echo '<p>A conta foi criada!</p>';
-                        }else{
-                            echo '<p>A conta já existe!</p>';
-                        }
-                    ?>
-<?php echo 'Existem ' . $totalEdificio . ' Edificios</br>'; ?>
+<?php
+//mensagem conta criada ou existe
+if ($_GET['r'] == 0) {
+    echo '<p>A conta foi criada!</p>';
+} else {
+    echo '<p>A conta já existe!</p>';
+}
+?>
+                    <?php echo 'Existem ' . $totalEdificio . ' Edificios</br>'; ?>
                     <label for="ed_nome">Nome:</label>
                     <input type="text" id="ed_nome" name="Nome do Edificio" maxlength="50" value="" /><br/>
                     <label for="ed_evol">Evolução:</label>

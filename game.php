@@ -125,10 +125,10 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                         getuservalues(); //preenche o $_SESSION com os dados do user
                         /* VALORES */
 
-                        echo "<div><p>Jogador: " . $_SESSION['utilizador_nome'] . "</p></div>"
-                         . "<div><p>Cidade: " . $_SESSION['cidade_nome'] . "</p></div>"
-                         . "<div><p>Moedas: " . $_SESSION['utilizador_moedas'] . "</p></div>"
-                         . "<div><p>Ouro:" . $_SESSION['utilizador_ouro'] . "</p></div>";
+                        echo "<div><p>Jogador: " . $_SESSION['utilizador']['nome'] . "</p></div>"
+                         . "<div><p>Cidade: " . $_SESSION['cidade']['nome'] . "</p></div>"
+                         . "<div><p>Moedas: " . $_SESSION['utilizador']['moedas'] . "</p></div>"
+                         . "<div><p>Ouro:" . $_SESSION['utilizador']['ouro'] . "</p></div>";
                     ?>
             </div>
             <div id="dica">

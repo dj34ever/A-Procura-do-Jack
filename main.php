@@ -1,7 +1,5 @@
-<?php session_start();
-
-echo 'START THIS SashiniN!';
-
+<?php 
+session_start();
 ?>
 <!DOCTYPE html>
 
