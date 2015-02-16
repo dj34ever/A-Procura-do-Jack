@@ -30,17 +30,17 @@ Implementar:
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-<?php
+        <?php
 //Verifica se existe uma sessão iniciada
-if (!isset($_SESSION['utilizador']['nome'])) {
-    die(header('Location: logout.php'));
-}
-?>
+        if (!isset($_SESSION['utilizador']['nome'])) {
+            die(header('Location: logout.php'));
+        }
+        ?>
         <div id="utilizador">
             <h4>Utilizador</h4>
             <form action="" method="POST">
                 <div>
-<?php echo 'Existem ' . $totalContas . ' Contas<br/>'; ?>
+                    <?php echo 'Existem ' . $totalContas . ' Contas<br/>'; ?>
                     <label for="u_nome">Nome:</label>
                     <input type="text" id="u_nome" name="u_nome" maxlength="50" value="" /><br/>
                     <label for="u_pass">Senha:</label>
@@ -60,14 +60,14 @@ if (!isset($_SESSION['utilizador']['nome'])) {
             <h4>Edificios</h4>
             <form action="" method="POST">
                 <div>
-<?php
+                    <?php
 //mensagem conta criada ou existe
-if ($_GET['r'] == 0) {
-    echo '<p>A conta foi criada!</p>';
-} else {
-    echo '<p>A conta já existe!</p>';
-}
-?>
+                    if ($_GET['r'] == 0) {
+                        echo '<p>A conta foi criada!</p>';
+                    } else {
+                        echo '<p>A conta já existe!</p>';
+                    }
+                    ?>
                     <?php echo 'Existem ' . $totalEdificio . ' Edificios</br>'; ?>
                     <label for="ed_nome">Nome:</label>
                     <input type="text" id="ed_nome" name="Nome do Edificio" maxlength="50" value="" /><br/>
@@ -97,7 +97,7 @@ if ($_GET['r'] == 0) {
             <h4>Missões</h4>
             <form action="" method="POST">
                 <div>
-<?php echo 'Existem ' . $totalQuest . ' Missões<br/>'; ?>
+                    <?php echo 'Existem ' . $totalQuest . ' Missões<br/>'; ?>
                     <label for="areas">Area:</label>
                     <select id="areas">
                         <option value="0">(0)Bellbroke Fort</option>
@@ -130,7 +130,7 @@ if ($_GET['r'] == 0) {
             <h4>Criaturas</h4>
             <form action="" method="POST">
                 <div>
-<?php echo 'Existem ' . $totalCriatura . 'Crituras<br/>'; ?>
+                    <?php echo 'Existem ' . $totalCriatura . 'Crituras<br/>'; ?>
                     <label for="c_nome">Nome da Criatura:</label>
                     <input type="text" id="c_nome" name="Nome da Criatura" maxlength="50" value="" /><br/>
                     <label for="c_evol"></label>
