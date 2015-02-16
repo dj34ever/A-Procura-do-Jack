@@ -34,6 +34,8 @@ if (isset($_POST['submit'])) {
         die(header('Location: main.php?false=2'));    
     }
 }
-else die(header('Location: main.php?false=3'));
+else{
+    die(header('Location: main.php?false=3'));
+}
 ?>
  

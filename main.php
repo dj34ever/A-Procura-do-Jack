@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php session_start();
+
+echo 'START THIS SashiniN!';
+
+?>
 <!DOCTYPE html>
 
 <html>
@@ -33,7 +37,7 @@
                 ?>
             </div>
         <?php } 
-        else header('Location: game.php');     
+        else{ header('Location: game.php');}     
         ?>
         <div>
 

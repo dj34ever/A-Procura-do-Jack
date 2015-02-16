@@ -1,5 +1,6 @@
 <?php
 
+require ('session.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 $message = "wrong answer";
@@ -8,8 +9,8 @@ require("action.php");
 //require("config.php");
 $erro = "Utilizador ou Palavra Passe incorrecta.";
 $ativo = 1;
-$moedas = 100000;
-$ouro = 100;
+$moedas = 0;
+$ouro = 0;
 //Verifica se foi submetido um post
 if (isset($_POST['submit'])) {
     //verifica se os campos foram preenchidos
