@@ -26,6 +26,7 @@ session_start();
                         <span><input type="button" value="Registar" onclick="window.location.href = 'novoutilizador.php'" /></span>
                     </div>
                 </form>
+            <a href="novapassword.php">Esqueceu a password?</a>
                 <?php
                 if ($_GET['false'] == 1) {
                     echo 'Utilizador ou Palavra Passe Incorrecto';

@@ -59,6 +59,19 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                             window.location.reload(true);
                     }, 1000);
             }
+   
+            function dialogo(value) {
+                
+                var msg = [
+                    "<h3>Insanity: doing the same thing over and over again and expecting different results.</h3><br>Albert Einstein",
+                    "<h3>Education is what remains after one has forgotten what one has learned in school.</h3><br>Albert Einstein" 
+                ];
+                
+        $("<div>" + msg[value] + "</div>").dialog({ modal:true}); 
+               
+            }
+
+
         </script>
     </head>
     <body>
@@ -122,28 +135,28 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                     });
                     </script>-->
                     <?php
-                        getuservalues(); //preenche o $_SESSION com os dados do user
-                        /* VALORES */
+                    getuservalues(); //preenche o $_SESSION com os dados do user
+                    /* VALORES */
 
-                        echo "<div><p>Jogador: " . $_SESSION['utilizador']['nome'] . "</p></div>"
-                         . "<div><p>Cidade: " . $_SESSION['cidade']['nome'] . "</p></div>"
-                         . "<div><p>Moedas: " . $_SESSION['utilizador']['moedas'] . "</p></div>"
-                         . "<div><p>Ouro:" . $_SESSION['utilizador']['ouro'] . "</p></div>";
+                    echo "<div><p>Jogador: " . $_SESSION['utilizador']['nome'] . "</p></div>"
+                    . "<div><p>Cidade: " . $_SESSION['cidade']['nome'] . "</p></div>"
+                    . "<div><p>Moedas: " . $_SESSION['utilizador']['moedas'] . "</p></div>"
+                    . "<div><p>Ouro:" . $_SESSION['utilizador']['ouro'] . "</p></div>";
                     ?>
-            </div>
-            <div id="dica">
-                <div>
-                    <p><span>Dicas</span></p>
-                    <span id="lb"><input class="" type="button" value="&NestedLessLess;" onclick="alert('systema de dicas')" /></span>
-                    <span id="rg"><input class="" type="button" value="&NestedGreaterGreater;" onclick="alert('systema de dicas')" /></span>
                 </div>
-                <div>
-                    <p><span>Dicas muda consoante o botão pressionado</span></p>
+                <div id="dica">
+                    <div>
+                        <p><span>Dicas</span></p>
+                        <span id="lb"><input class="dicas" type="button" value="&NestedLessLess;" onclick="dialogo(0)" /></span>
+                        <span id="rg"><input class="dicas" type="button" value="&NestedGreaterGreater;"  onclick="dialogo(1)"/></span>
+                    </div>
+                    <div>
+                        <p><span>Dicas muda consoante o botão pressionado</span></p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="news">stuff</div>
-    <footer id="footer"></footer>
+        <div id="news">stuff</div>
+        <footer id="footer"></footer>
     </body>
 </html>
