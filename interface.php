@@ -35,7 +35,7 @@ Implementar:
     <body>
         <?php
         //Verifica se existe uma sessão iniciada
-        if (!isset($_SESSION['utilizador']['nome']))
+        if (!isset($_SESSION['utilizador']['nome'])){
             die(header('Location: logout.php'));
         }
         ?>
