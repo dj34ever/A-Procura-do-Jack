@@ -1,10 +1,18 @@
 <?php
-session_start();
 
-$totalContas = 0;
-$totalEdificio = 0;
-$totalQuest = 0;
-$totalCriatura = 0;
+require ('session.php');
+require ('action.php');
+
+//vocab.php
+
+
+//action.php
+//countAll($table)
+
+$totalContas = countAll('utilizador');
+$totalEdificio = countAll('edificio');
+$totalQuest = countAll('quest');
+$totalCriatura = countAll('criatura');
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +37,7 @@ Implementar:
         //Verifica se existe uma sessão iniciada
         if (!isset($_SESSION['utilizador']['nome']))
             die(header('Location: logout.php'));
+        }
         ?>
         <div id="utilizador">
             <h4>Utilizador</h4>
@@ -36,24 +45,31 @@ Implementar:
                 <div>
 <?php echo 'Existem ' . $totalContas . ' Contas<br/>'; ?>
                     <label for="u_nome">Nome:</label>
-                    <input type="text" id="u_nome" name="Nome de Utilizador" maxlength="50" value="" /><br/>
+                    <input type="text" id="u_nome" name="u_nome" maxlength="50" value="" /><br/>
                     <label for="u_pass">Senha:</label>
-                    <input type="text" id="u_pass" name="Senha" maxlength="8" value="" /><br/>
+                    <input type="text" id="u_pass" name="u_pass" maxlength="8" value="" /><br/>
                     <label for="u_email">Email:</label>
-                    <input type="text" id="u_email" name="Email" maxlength="50" value="" /><br/>
+                    <input type="text" id="u_email" name="u_email" maxlength="50" value="" /><br/>
                     <p>Tipo de Conta:</p>
                     <input type="radio" id="comum" name="tipo_conta" tabindex="0" value="0" />
                     <label for="comum">(0)Comum</label><br/>
                     <input type="radio" id="admin" name="tipo_conta" tabindex="1" value="1" />
                     <label for="admin">(1)Admin</label><br/>
                 </div>
-                <div><input type="submit" value="Adicionar" name="u_submit"/></div>
+                <div><input type="submit" value="Criar Conta" name="u_submit"/></div>
             </form>
         </div>
         <div id="edificio">
             <h4>Edificios</h4>
             <form action="" method="POST">
                 <div>
+                    <?php //mensagem conta criada ou existe
+                        if($_GET['r']==0){
+                            echo '<p>A conta foi criada!</p>';
+                        }else{
+                            echo '<p>A conta já existe!</p>';
+                        }
+                    ?>
 <?php echo 'Existem ' . $totalEdificio . ' Edificios</br>'; ?>
                     <label for="ed_nome">Nome:</label>
                     <input type="text" id="ed_nome" name="Nome do Edificio" maxlength="50" value="" /><br/>

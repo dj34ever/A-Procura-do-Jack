@@ -1,0 +1,186 @@
+/*HTML CSS FORMATING*/
+body{
+    /*background-image: url("../images/bg.jpg");*/
+    background-color: #040515;
+    background-repeat: repeat-x;
+    background-size: cover;
+    color: blanchedalmond;
+}
+
+/*BUTTON MENU*/
+.btn{
+    font-family: arial;
+    font-size: 20px;
+    width: 100px;
+    height: 30px;
+    border-radius: 1px 15px 2px 5px;
+    margin: 5;
+    border-bottom-style: ridge;
+    /*cursor: pointer;*/
+}
+
+/*GENERAL FORMATTING*/
+
+p,H1{color: blanchedalmond;}
+
+.center{
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.visible{
+    visibility: visible;
+}
+.ivisible{/*notvisible*/
+    visibility: hidden;
+}
+
+.hide{
+    display: none;
+}
+
+.show{
+    display: block;
+}
+
+/*MAPA*/
+#openMap{
+    background-image: url("../images/bg.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 850px;
+    height: 620px;
+    border: 1px solid black;
+    background-color: #040515;
+}
+
+#mapTitle,
+#mapImg{
+    width: 753px;
+/*    border: 1px solid #00d9ff;*/
+    left: 10px;
+}
+
+#mapTitle{
+    height: 26px;
+    z-index: 5;
+    position: absolute;
+    top: 18px;
+    overflow: visible;
+}
+
+#mapImg{
+    position: relative;
+    top: 10px;
+    height: 600px;
+    background-image: url("../images/Papper_map_800x618.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/*MAP AREA*/
+#m1{
+    color: #00d9ff;
+    position: absolute;
+    z-index: 9;
+    top: 284px;
+    left: 194px;
+}
+
+#m2{
+    color: #00d9ff;
+    position: absolute;
+    z-index: 9;
+    top: 399px;
+    left: 413px;
+}
+
+#m3{
+    color: #00d9ff;
+    position: absolute;
+    z-index: 9;
+    top: 477px;
+    left: 695px;
+}
+
+#m4{
+    color: #00d9ff;
+    position: absolute;
+    z-index: 9;
+    top: 230px;
+    left: 670px;
+}
+
+/*QuestWindow*/
+#openQuest,
+#openCreature{
+    border: 1px solid #00d9ff;
+}
+
+/*SHOW TABLES LIST*/
+#q,#c,#cp{
+    border: 1px solid chartreuse;
+}
+
+/*TEST MODAL DIALOG*/
+/*
+.modalDialog{
+    position: fixed;
+    font-family: Arial, sans-serif;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 99990;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+
+.modalDialog:target{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modalDialog > div{
+    width: 600px;400px;
+    height: 400px;
+    position: relative;
+    margin: 10% auto;
+    padding: 5px 20px 13px 20px;
+    border-radius: 10px;
+    background: #FFF;
+    background: -moz-linear-gradient(#FFF, #999);
+    background: -webkit-linear-gradient(#FFF, #999);
+    background: -o-linear-gradient(#FFF, #999);
+}
+
+.close{
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    z-index: 99999;
+    display: block;
+    text-decoration: none;
+    font-weight: bold;
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 1px 1px 3px #000;
+    -webkit-box-shadow: 1px 1px 3px #000;
+    box-shadow: 1px 1px 3px #000;
+}
+
+.close:hover{
+    background: #00d9ff;
+}
+
+#close{
+    display: none;
+}*/

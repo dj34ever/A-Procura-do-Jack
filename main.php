@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php session_start();
+
+echo 'START THIS SashiniN!';
+
+?>
 <!DOCTYPE html>
 
 <html>
