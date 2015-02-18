@@ -39,10 +39,10 @@ and open the template in the editor.
                     <form action="quest.php" method="POST">
                         <input type="submit" id="m4" name="qa4" value="4"/>
                     </form>-->
-                    <a id="m1" href="QuestShow.php?t=1&show=0">1</a>
-                    <a id="m2" href="QuestShow.php?t=2&show=0">2</a>
-                    <a id="m3" href="QuestShow.php?t=3&show=0">3</a>
-                    <a id="m4" href="QuestShow.php?t=4&show=0">4</a>
+                    <a id="m1" href="QuestShow.php?gocu=0&goq=0&t=1&show=0">1</a>
+                    <a id="m2" href="QuestShow.php?gocu=0&goq=0&t=2&show=0">2</a>
+                    <a id="m3" href="QuestShow.php?gocu=0&goq=0&t=3&show=0">3</a>
+                    <a id="m4" href="QuestShow.php?gocu=0&goq=0&t=4&show=0">4</a>
                 </div>
                 <input type="button" value="close" />
             </div>
@@ -53,16 +53,15 @@ and open the template in the editor.
                  * quest unlocked?
                  * botão de iniciar quest
                  */
-                
+                getuservalues();
+                    //Mostrar quest de acordo com a area selecionada
                     if(!empty($_GET['t']) && !empty($_GET['show']) || $_GET['show']==0 && !empty($_GET['t'])){//ambas têm de estar preenchidas
-                    $area =  mysqli_escape_string($dbConn, $_GET['t']);
-                    $show = mysqli_escape_string($dbConn, $_GET['show']);
-                        echo $_GET['t']."\n".$_GET['show'];//debug
-                        if($show == 0 && $area > 0 && $area < 5){//show tem de ser true
-                            if($area > 0 || $area < 5){//t tem de ser de 1 a 4
+                    $area =  dbEscapeString($_GET['t']);
+                    $show = dbEscapeString($_GET['show']);
+                        echo "AREA Nº: ".$_GET['t']." MOSTRA: ".$_GET['show'];//debug
+                        if($show == 0 && $area > 0 || $area < 5){//show tem de ser true //t tem de ser de 1 a 4
                                 echo "<p>" . $area . "</p>";//debug
                                 questSearch($area);//este está a ser problemátivo
-                            }
                         }else{
                             echo " URL FOI MEXIDA!";
                         }
@@ -72,7 +71,34 @@ and open the template in the editor.
                 <div id="openCreature">
                 <?php
                 //showPlayerCreature();//mostra todas as criaturas do player
-                showCreature(120, 40);
+                if(!empty($_GET['q'])){//preenchido
+                $q = dbEscapeString($_GET['q']);
+                echo "ESCOLHE QUEST Nº: ".$_GET['q'];//debug
+                    if($q>0 || $q!=null){
+                        showCreatureQuest($_GET['q']);
+                    }
+                }
+                
+                if(!empty($_GET['gocu'] && !empty($_GET['goq']))){//recebe utilizador_criatura e id da quest
+                    $cu = dbEscapeString($_GET['gocu']);
+                    $qi = dbEscapeString($_GET['goq']);
+                    echo "criatura_utilizador: ".$cu.", Quest: ".$qi;//debug
+                    if($cu!=NULL || $qi!=NULL || $cu>0 || $qi>0){
+                        //inserir na tabela quest_utilizador
+                        $tmp = getQuestTime($qi);//tempo quest
+                        echo "tempo: ".$tmp;//debug
+                        //$uid, $qi, $cuid, $tmp
+                        getuservalues();
+                        insertQUValue($_SESSION['utilizador']['id'], $qi, $cu, $tmp);//insere na tabela 
+                    }    
+                }
+                
+                test();
+                //showCreature(100, 1);
+                //$qid=2;
+                //echo "Quest existe? ".existQuestUtilizador($qid);//funcional
+                //echo "Quest Ativa? ".isQuestActive($qid);//funcional
+                //echo "\n".$_SESSION['utilizador']['nome'];
                 ?>
                 </div>
                 <div id="">
