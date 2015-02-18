@@ -61,17 +61,11 @@ and open the template in the editor.
 
 
                 function menu(quests) {
-                    //selectValues = ["a", "b", "c"];
-                    //quests = ["a", "b", "c"];
-                    alert(quests);
-                    console.log(quests);
-                
                     $.each(quests, function (value) {
                         $('#quest')
                                 .append($("<option></option>")
-                                        .attr("value", value)//.attr("value", value)
-                                        .text(quests[value]));//.text(value));
-                                
+                                        .attr("value",quests[value][0])//.attr("value", value)
+                                        .text(quests[value][2]));//.text(value)); 
                     });
 
                 }

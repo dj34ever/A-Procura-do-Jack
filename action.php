@@ -268,29 +268,8 @@ function questSearch($area) {//adicionei isto
     $sql = "SELECT a.*, b.nome as bnome FROM quest a, area b WHERE $a=b.area AND b.area=a.area";
     $query = dbFetch($sql);
     if ($query) {
-        
-        while ($result = mysqli_fetch_assoc($query)) {//area
-            $ab[]=$result;
-            
-            
-            echo "<div id='q'>"
-            . "<div> Area: " . $result['bnome'] . "</div>"
-            . "<div> Nome: " . $result['nome'] . "</div>"
-            . "<div> Desc: " . $result['desc'] . "</div>"
-            . "<div> HP: " . $result['hp'] . "</div>"
-            . "<div> EN: " . $result['en'] . "</div>"
-            . "<div> Tempo: " . $result['temp'] . "</div>"
-            . "<div> Ouro: " . $result['ouro'] . "</div>"
-            . "<div> Moedas: " . $result['moedas'] . "</div>"
-            . "<div> Exp: " . $result['exp'] . "</div>"
-//            . "<div> Bloqueada: " . $result['unlock'] . "</div>"
-//            . "<div> Ativa: " . $result['ativa'] . "</div>"
-            . "<a href='QuestShow.php?q=" . $result['id'] . "&gocu=0&goq=0&area=0'> accept </a>"
-            . "</div><br/>";
-        }
-    }// else {
-//        echo "<div id='q'> Sem resultado </div>";
-//    }
+        return mysqli_fetch_all($query);
+    }
 }
 
 /* SISTEMA MONETARIO */
