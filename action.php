@@ -1,5 +1,6 @@
 <?php
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 //Obtem valores do utilizador (ouro, moedas ...)
 function getuservalues() {
     if (!isset($_SESSION['utilizador']['nome'])) {
