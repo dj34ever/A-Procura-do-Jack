@@ -76,6 +76,13 @@ function dbFetch($sql) {
     return $result;
 }
 
+function dbEscapeString($string)
+{
+    require ("config.php");
+    $result = mysqli_escape_string($GLOBALS['dbConn'], $string);
+    mysqli_close($GLOBALS['dbConn']);
+    return $result;
+}
 /* A PARTIR DAQUI É NOVO! */
 
 /* INTERFACE */
