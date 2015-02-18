@@ -9,11 +9,12 @@ if (session_status() != PHP_SESSION_ACTIVE) {
 if (!isset($_SESSION['utilizador']['nome'])) {
     die(header('Location: logout.php'));
 }
+$id=absint(dbEscapeString($_POST['id']));
+$pos=absint(dbEscapeString($_POST['pos']));
 
-$id = $_POST['id'];
-$pos = $_POST['pos'];
 
-if (!(empty($id) || empty($pos))) {
+if (empty($id) || empty($pos)) die(header('Location: logout.php'));
+
     $cidade = $_SESSION['cidade']['id'];
     //encontra edificio atualmente construido na posicao
     foreach ($_SESSION['edificio_cidade'] as $edificio) {
@@ -61,7 +62,7 @@ if (!(empty($id) || empty($pos))) {
 //        $query = mysqli_query($GLOBALS['dbConn'], $sql);
 //        echo 0;
 //    }
-}
+
 else die(header('Location: logout.php'))
 ?>
 

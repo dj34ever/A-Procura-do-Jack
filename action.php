@@ -70,19 +70,21 @@ function getconstructedbuildings() {
 
 //executa a query; termina a ligacao; retorna um result do mysqli_query
 function dbFetch($sql) {
-    require ("config.php");
-    $result = mysqli_query($GLOBALS['dbConn'], $sql);
-    mysqli_close($GLOBALS['dbConn']);
+    require_once ("config.php");
+    $dbconn = dbConnect();
+    $result = mysqli_query($dbconn, $sql);
+    mysqli_close($dbconn);
     return $result;
 }
 
-function dbEscapeString($string)
-{
-    require ("config.php");
-    $result = mysqli_escape_string($GLOBALS['dbConn'], $string);
-    mysqli_close($GLOBALS['dbConn']);
+function dbEscapeString($string) {
+    require_once ("config.php");
+    $dbconn = dbConnect();
+    $result = mysqli_escape_string($dbconn, $string);
+    mysqli_close($dbconn);
     return $result;
 }
+
 /* A PARTIR DAQUI É NOVO! */
 
 /* INTERFACE */
@@ -127,7 +129,7 @@ function showCreatureQuest($id) {
      * 
      */
     //obtem quest
-    $q_id = mysqli_escape_string($dbConn, $id);
+    $q_id = dbEscapeString($id);
     $sql = "SELECT * FROM quest WHERE id=" . $q_id;
     $query = dbFetch($sql);
 
@@ -168,12 +170,7 @@ function showCreature($en, $hp) {
 function questSearch($area) {//adicionei isto
     require("config.php");
 
-    $a = mysqli_escape_string($GLOBALS['dbConn'], $area);
-    //$sql = "SELECT id, a.nome, desc, hp, en, temp, ouro, moedas, exp, unlock, ativa, b.nome FROM quest a, area b WHERE b.area='" . $a . "' AND a.area=b.area";
-    //. "'" . $a . "' AND";
-    //$sql="SELECT a.*, b.nome as bnome FROM quest a, area b WHERE a.area='" . $a . "' AND b.area=a.area";//debug
-//    $sql="SELECT a.*, b.nome as bnome FROM quest a, area b WHERE a.area='" . $a . "' AND b.area=a.area AND a.unlock=0";//deu!
-    //$sql="SELECT a.*, b.nome as bnome FROM quest a, area b WHERE a.area=b.area AND b.area IN (SELECT area FROM area WHERE area=$a)";
+    $a = dbEscapeString($area);
     $sql = "SELECT a.*, b.nome as bnome FROM quest a, area b WHERE $a=b.area AND b.area=a.area";
     $query = mysqli_query($GLOBALS['dbConn'], $sql);
     mysqli_close($GLOBALS['dbConn']);
