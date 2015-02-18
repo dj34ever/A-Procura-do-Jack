@@ -27,13 +27,14 @@ session_start();
                     </div>
                 </form>
                 <?php
-                if ($_GET['false'] == 1) {
+                
+                if (!empty($_GET['false']) == 1) {
                     echo 'Utilizador ou Palavra Passe Incorrecto';
-                } elseif ($_GET['false'] == 2) {
+                } elseif (!empty($_GET['false']) == 2) {
                     echo 'Já existe um Utilizador com o mesmo Username';
-                } elseif ($_GET['false'] == 3) {
+                } elseif (!empty($_GET['false']) == 3) {
                     echo 'Ocorreu um erro desconhecido';
-                } elseif ($_GET['false'] == 4) {
+                } elseif (!empty($_GET['false']) == 4) {
                     echo 'Preencha todos os Campos';
                 }
                 ?>
