@@ -127,19 +127,8 @@ function showPlayerCreature() {//show all creatures from player in session
 function showCreatureQuest($id) {
     //obtem quest
     $qid = dbEscapeString($id); //id da quest
-    //getuservalues();
-    /* $sql = "SELECT a.* FROM criatura_utilizador a, quest b WHERE a.en>=b.en AND b.en IN(SELECT en FROM quest WHERE id=$qid) AND"
-      ." a.hp>=b.hp AND b.hp IN (SELECT hp FROM quest WHERE id=$qid)"; */
-    /* $sql = "SELECT a.*, c.username as cuser FROM criatura_utilizador a, quest b, utilizador c WHERE a.en>=b.en AND b.en IN(SELECT en FROM quest WHERE id=$qid) AND"
-      ." a.hp>=b.hp AND b.hp IN(SELECT hp FROM quest WHERE id=$qid) AND c.id='" . $_SESSION['utilizador']['id'] . "'"; */
-
-    $sql = "SELECT a.*, c.username as cuser FROM criatura_utilizador a, quest b, utilizador cWHERE a.en>=b.en AND b.en IN(SELECT en FROM quest WHERE id=$qid) AND"
-            . " a.hp>=b.hp AND b.hp IN(SELECT hp FROM quest WHERE id=$qid) AND c.id='" . $_SESSION['utilizador']['id'] . "' AND a.c_id NOT IN(SELECT c_id FROM quest_utilizador WHERE id='" . $_SESSION['utilizador']['id'] . "')";
-
-    //$sql = "SELECT a.*, c.username as buser FROM criatura_utilizador a, quest b, utilizador c, quest_utilizador d WHERE a.en>=b.en AND b.en IN (SELECT en FROM quest WHERE id=$qid)"
-    //. " AND a.hp>=b.hp AND b.hp IN (SELECT hp FROM quest WHERE id=$qid)";// AND c.id=" . $_SESSION['utilizador']['id'];
-// AND a.cu_id=(SELECT cu_id FROM quest_utilizador WHERE u_id='" . $_SESSION['utilizador']['id'] . "')";
-    //$sql = "INSERT INTO quest_utilizador (q_id, cu_id, tempo_ate_completar) SELECT a.id, b.id FROM quest a, criatura_utilizador WHERE id=" . $q_id;
+    $sql = "SELECT a.*, c.username as cuser FROM criatura_utilizador a, quest b, utilizador c WHERE a.en>=b.en AND b.en IN(SELECT en FROM quest WHERE id=$qid) AND"
+      ." a.hp>=b.hp AND b.hp IN(SELECT hp FROM quest WHERE id=$qid) AND c.id='" . $_SESSION['utilizador']['id'] . "' AND a.c_id NOT IN(SELECT cu_id FROM quest_utilizador)";
     $query = dbFetch($sql);
     if ($query) {//existe a quest        
         while ($result = mysqli_fetch_assoc($query)) {
@@ -152,11 +141,10 @@ function showCreatureQuest($id) {
             . "<div>Evolução: " . $result['evol'] . "</div>"
             . "<div>HP: " . $result['hp'] . "</div>"
             . "<div>EN: " . $result['en'] . "</div>"
-            . "<a href='QuestShow.php?gocu=" . $result['id'] . "&goq=" . $qid . "&t=0&show=0'> accept </a></div><br/>";
+            . "<a class='' href='QuestShow.php?gocu=" . $result['id'] . "&goq=" . $qid . "&t=0&show=0'> accept </a></div><br/>";
         }
     } else {
-        echo 'Não existem criaturas.';
-        die(header('Location: QuestShow.php?gocu=0&goq=0&t=0&show=0'));
+        echo 'Não existem criaturas.'; die(header('Location: QuestShow.php?gocu=0&goq=0&t=0&show=0'));
     }
 }
 
@@ -177,8 +165,12 @@ function test() {//update 1
 }
 
 ///PROBLEMA!
-function insertQUValue($uid, $qid, $cuid, $qtemp) {
-    $sql = "INSERT INTO quest_utilizador (u_id, q_id, cu_id, temp, ativa) VALUES ($uid, $qid, $cuid, $qtemp, 1)";
+function insertQUValue($uid, $qid, $cuid) {
+    include_once('config.php');
+    getuservalues();
+    $uid = $_SESSION['utilizador']['id'];
+    $temp = getQuestTime($qid);
+    $sql = "INSERT INTO quest_utilizador (u_id, q_id, cu_id, temp) VALUES ('".$uid."', '".$qid."', '".$cuid."', '".$temp."')";
     //$query = dbFetch($sql);
     dbFetch($sql);
 }

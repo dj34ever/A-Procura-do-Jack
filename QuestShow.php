@@ -85,11 +85,8 @@ and open the template in the editor.
                     echo "criatura_utilizador: ".$cu.", Quest: ".$qi;//debug
                     if($cu!=NULL || $qi!=NULL || $cu>0 || $qi>0){
                         //inserir na tabela quest_utilizador
-                        $tmp = getQuestTime($qi);//tempo quest
-                        echo "tempo: ".$tmp;//debug
                         //$uid, $qi, $cuid, $tmp
-                        getuservalues();
-                        insertQUValue($_SESSION['utilizador']['id'], $qi, $cu, $tmp);//insere na tabela 
+                        insertQUValue($_SESSION['utilizador']['nome'], $qi, $cu);//insere na tabela
                     }    
                 }
                 
