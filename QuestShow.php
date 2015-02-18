@@ -57,30 +57,27 @@ and open the template in the editor.
                 <input type="button" value="close" />
             </div>
             <script>
-
-
-
                 function menu(quests) {
                     $.each(quests, function (value) {
                         $('#quest')
                                 .append($("<option></option>")
-                                        .attr("value",quests[value][0])//.attr("value", value)
-                                        .text(quests[value][2]));//.text(value)); 
+                                        .attr("value", quests[value][0])//.attr("value", value)
+                                        .text(quests[value][2])); //.text(value)); 
                     });
-
+                    $(function () {
+                        $("#quest").selectmenu({
+                        change: function (event, data) {
+                            window.location.href = ("QuestShow.php?area=" + quests[0][1] + "&goq=" + data.item.value);}
+                        });
+                    
+                    });
                 }
-                
-               
             </script>
 
-            
-            
-            
+
+
+
             <div id="openQuest"><!--JANELA QUEST-->
-
-
-
-
 
                 <?php
                 /* Ao clicar numa das areas do mapa quero enviar
@@ -95,12 +92,12 @@ and open the template in the editor.
                     echo "AREA Nº: $area MOSTRA: "; //debug
                     if ($area > 0 && $area < 5) {//show tem de ser true //t tem de ser de 1 a 4
                         echo "<p>" . $area . "</p>"; //debug
-                        $quest = questSearch($area); //este está a ser problemátivo
-                        if(!empty($quest)){
-                        $quest = json_encode($quest);//converte array para json-> enviar para javascript
-                        echo "<label for=\"quest\">Selecionar Quest</label>";
-                        echo "<select id=\"quest\"></select>";
-                        echo "<script>menu(".$quest.");</script>";
+                        $arrayquest = questSearch($area); //este está a ser problemátivo
+                        if (!empty($arrayquest)) {
+                            $arrayquest = json_encode($arrayquest); //converte array para json-> enviar para javascript
+                            echo "<label for=\"quest\">Selecionar Quest</label>";
+                            echo "<select id=\"quest\"></select>";
+                            echo "<script>menu($arrayquest);</script>";
                         }
                     } else {
                         echo " URL FOI MEXIDA!";
@@ -108,6 +105,7 @@ and open the template in the editor.
                 }//recebo o id da quest $_GET['q']
                 ?>
                 <div id="openCreature">
+
                     <?php
                     //showPlayerCreature();//mostra todas as criaturas do player
                     if (!empty($_GET['q'])) {//preenchido
