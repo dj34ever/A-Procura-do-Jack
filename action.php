@@ -165,7 +165,7 @@ function test() {//update 1
 }
 
 ///PROBLEMA!
-function insertQUValue($uid, $qid, $cuid) {
+function insertQUValue($qid, $cuid) {
     include_once('config.php');
     getuservalues();
     $uid = $_SESSION['utilizador']['id'];
@@ -268,10 +268,14 @@ function questSearch($area) {//adicionei isto
     $sql = "SELECT a.*, b.nome as bnome FROM quest a, area b WHERE $a=b.area AND b.area=a.area";
     $query = dbFetch($sql);
     if ($query) {
+        
         while ($result = mysqli_fetch_assoc($query)) {//area
+            $ab[]=$result;
+            
+            
             echo "<div id='q'>"
-            . "<div> Area: " . $result['nome'] . "</div>"
-            . "<div> Nome: " . $result['bnome'] . "</div>"
+            . "<div> Area: " . $result['bnome'] . "</div>"
+            . "<div> Nome: " . $result['nome'] . "</div>"
             . "<div> Desc: " . $result['desc'] . "</div>"
             . "<div> HP: " . $result['hp'] . "</div>"
             . "<div> EN: " . $result['en'] . "</div>"
@@ -281,7 +285,7 @@ function questSearch($area) {//adicionei isto
             . "<div> Exp: " . $result['exp'] . "</div>"
 //            . "<div> Bloqueada: " . $result['unlock'] . "</div>"
 //            . "<div> Ativa: " . $result['ativa'] . "</div>"
-            . "<a href='QuestShow.php?q=" . $result['id'] . "&gocu=0&goq=0&t=0&show=0'> accept </a>"
+            . "<a href='QuestShow.php?q=" . $result['id'] . "&gocu=0&goq=0&area=0'> accept </a>"
             . "</div><br/>";
         }
     }// else {
