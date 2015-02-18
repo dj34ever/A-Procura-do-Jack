@@ -63,6 +63,6 @@ if (empty($id) || empty($pos)) die(header('Location: logout.php'));
 //        echo 0;
 //    }
 
-else die(header('Location: logout.php'))
+else die(header('Location: logout.php'));
 ?>
 
