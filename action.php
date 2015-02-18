@@ -101,7 +101,8 @@ function countAll($table) {//contar o nº de registos p/tabela
 }
 
 function showPlayerCreature() {//show all creatures from player in session
-    $sql = "SELECT a.*, b.username as buser FROM criatura_utilizador a, utilizador b WHERE a.u_id=b.id AND b.username='" . $_SESSION['utilizador_nome'] . "'";
+    getuservalues();
+    $sql = "SELECT a.*, b.username as buser FROM criatura_utilizador a, utilizador b WHERE a.u_id=b.id AND b.username='" . $_SESSION['utilizador']['nome'] . "'";
     $query = dbFetch($sql);
     $i = 0;
     if ($query) {
@@ -123,32 +124,117 @@ function showPlayerCreature() {//show all creatures from player in session
 }
 
 function showCreatureQuest($id) {
-    /* verificar se a quest está ativa
-     * verificar qual a criatura que está disponivel
-     * selecionar todas as criaturas
-     * 
-     */
     //obtem quest
-    $q_id = dbEscapeString($id);
-    $sql = "SELECT * FROM quest WHERE id=" . $q_id;
+    $qid = dbEscapeString($id); //id da quest
+    $sql = "SELECT a.*, c.username as cuser FROM criatura_utilizador a, quest b, utilizador c WHERE a.en>=b.en AND b.en IN(SELECT en FROM quest WHERE id=$qid) AND"
+      ." a.hp>=b.hp AND b.hp IN(SELECT hp FROM quest WHERE id=$qid) AND c.id='" . $_SESSION['utilizador']['id'] . "' AND a.c_id NOT IN(SELECT cu_id FROM quest_utilizador)";
     $query = dbFetch($sql);
-
-    if ($query) {//existe a quest
-        $result = mysqli_fetch_assoc($query); //recolher en e hp
-        $en = $result['en'];
-        $hp = $result['hp'];
+    if ($query) {//existe a quest        
+        while ($result = mysqli_fetch_assoc($query)) {
+            echo "<div id='c'>"
+            . "<div>Id: " . $result['id'] . "</div>"
+            . "<div>Jogador: " . $result['cuser'] . "<div>"
+            . "<div>Criatura: " . $result['c_id'] . "<div>"
+            . "<div>Imagem: <img src='" . $result['img'] . "' alt='criatura " . $result['id'] . "'/></div>"
+            . "<div>Nome: " . $result['nome'] . "</div>"
+            . "<div>Evolução: " . $result['evol'] . "</div>"
+            . "<div>HP: " . $result['hp'] . "</div>"
+            . "<div>EN: " . $result['en'] . "</div>"
+            . "<a class='' href='QuestShow.php?gocu=" . $result['id'] . "&goq=" . $qid . "&t=0&show=0'> accept </a></div><br/>";
+        }
     } else {
-        die(header('Location: QuestShow.php'));
+        echo 'Não existem criaturas.'; die(header('Location: QuestShow.php?gocu=0&goq=0&t=0&show=0'));
     }
-
-    //procura criatura
-    showCreature($en, $hp);
 }
 
-function showCreature($en, $hp) {
-    $sql = "SELECT a.*, b.username as buser FROM criatura_utilizador a, utilizador"
-            . " WHERE a.u_id=b.id AND b.username='" . $_SESSION['utilizador_nome']
-            . "' AND a.en>=$en AND a.hp>=$hp";
+///////////////////////////////////////////////////TESTE///////////////////////////////////////////////////////
+function test() {//update 1
+    $sql = "SELECT * FROM quest_utilizador WHERE u_id=" . $_SESSION['utilizador']['id'];
+    $query = dbFetch($sql);
+    while ($result = mysqli_fetch_assoc($query)) {//ERRO?
+        echo "<div id='q'>"
+        . "<div>Id: " . $result['id'] . "</div>"
+        . "<div>Jogador ID: " . $result['u_id'] . "<div>"
+        . "<div>Quest ID: " . $result['q_id'] . "<div>"
+        . "<div>Criatura ID: " . $result['cu_id'] . "<div>"
+        . "<div>TEMPO: " . $result['tempo'] . "<div>"
+        . "<div>ATIVA: " . $result['ativa'] . "</div>"
+        . "<br/>";
+    }
+}
+
+///PROBLEMA!
+function insertQUValue($uid, $qid, $cuid) {
+    include_once('config.php');
+    getuservalues();
+    $uid = $_SESSION['utilizador']['id'];
+    $temp = getQuestTime($qid);
+    $sql = "INSERT INTO quest_utilizador (u_id, q_id, cu_id, temp) VALUES ('".$uid."', '".$qid."', '".$cuid."', '".$temp."')";
+    //$query = dbFetch($sql);
+    dbFetch($sql);
+}
+
+//function updateQUValue($id, $cuid, $qtemp){
+//    $sql = "UPDATE quest_utilizador SET cu_id=$cuid, temp=$qtemp, ativa=1 WHERE id=$id";
+//    //$query = dbFetch($sql);
+//    dbFetch($sql);
+//}
+
+function activateQuest($cuid, $qtemp, $id) {//ativa quest_utilizador
+    $sql = "UPDATE quest_utilizador SET cu_id=$cuid, temp=$qtemp WHERE id=$id";
+    //$query = dbFetch($sql);
+    dbFetch($sql);
+}
+
+function getQuestTime($qid) {//tempo da quest
+    $sql = "SELECT temp FROM quest WHERE id=$qid";
+    $query = dbFetch($sql);
+    $result = mysqli_fetch_assoc($query);
+    return $result['temp'];
+}
+
+function LowerStat($cuid, $qid) {//Diminui EN e HP automático
+    //quest status
+    $sql = "SELECT en, hp FROM quest Where id=$qid";
+    $query = dbFetch($sql);
+    $result = mysqli_fetch_assoc($query);
+
+    $qen = $result['en'];
+    $qhp = $result['hp'];
+
+    //criatura status
+    $sql = "SELECT en, hp FROM criatura_utilizador Where id=$qid AND c_id=$cuid AND u_id='" . $_SESSION['utilizador']['id'] . "'";
+    $query = dbFetch($sql);
+    $result = mysqli_fetch_assoc($query);
+
+    $cen = $result['en'];
+    $chp = $result['hp'];
+
+    //calcular
+    $EN = $cen - $qen;
+    $HP = $chp - $qhp;
+
+    //exp da quest
+    $exp = getExpQuest($qid);
+
+    function updateCreatureUtilizador($qid, $cuid, $exp, $HP, $EN) {//faz update da criatura, eh, hp, exp
+        $sql = "UPDATE criatura_utilizador SET en=$EN, hp=$HP WHERE c_id=$cuid AND u_id='" . $_SESSION['utilizador']['id'] . "'";
+        $query = dbFetch($sql);
+    }
+
+}
+
+function getExpQuest($qid) {//get exp from quest
+    $sql = "SELECT exp from quest WHERE id=$qid";
+    $query = dbFetch($sql);
+    $result = mysqli_fetch_assoc($query);
+
+    return $result;
+}
+
+function showCreature() {//todas as criaturas do utilizador
+    $sql = "SELECT a.*, b.username as buser FROM criatura_utilizador a, utilizador b"
+            . " WHERE a.u_id=b.id AND b.username='" . $_SESSION['utilizador']['nome'] . "'";
     $query = dbFetch($sql);
 
     while ($result = mysqli_fetch_assoc($query)) {
@@ -161,6 +247,7 @@ function showCreature($en, $hp) {
         . "<div>Evolução: " . $result['evol'] . "</div>"
         . "<div>HP: " . $result['hp'] . "</div>"
         . "<div>EN: " . $result['en'] . "</div>"
+        . "<div>EN: " . $result['ativa'] . "</div>"
         . "<br/>";
     }
 }
@@ -168,17 +255,22 @@ function showCreature($en, $hp) {
 /* QUEST */
 
 function questSearch($area) {//adicionei isto
-    require("config.php");
-
+    //require("config.php");
     $a = dbEscapeString($area);
+    //$sql = "SELECT id, a.nome, desc, hp, en, temp, ouro, moedas, exp, unlock, ativa, b.nome FROM quest a, area b WHERE b.area='" . $a . "' AND a.area=b.area";
+    //. "'" . $a . "' AND";
+    //$sql="SELECT a.*, b.nome as bnome FROM quest a, area b WHERE a.area='" . $a . "' AND b.area=a.area";//debug
+    //$sql="SELECT a.*, b.nome as bnome FROM quest a, area b WHERE a.area='" . $a . "' AND b.area=a.area AND a.unlock=0";//deu!
+    //$sql="SELECT a.*, b.nome as bnome FROM quest a, area b WHERE a.area=b.area AND b.area IN (SELECT area FROM area WHERE area=$a)";
+    //$sql = "SELECT a.id, a.nome, a.desc, a.hp, a.en, a.temp, a.ouro, a.moedas, a.exp, a.unlock, a.ativa, b.nome as bnome FROM quest a, area b"; //WHERE a.area=b.area AND b.area IN (SELECT area From area WHERE area=".$a.")";
+    //$sql = "SELECT a.*, b.nome FROM quest a, area b WHERE $a=b.area AND b.area=a.area";
     $sql = "SELECT a.*, b.nome as bnome FROM quest a, area b WHERE $a=b.area AND b.area=a.area";
-    $query = mysqli_query($GLOBALS['dbConn'], $sql);
-    mysqli_close($GLOBALS['dbConn']);
+    $query = dbFetch($sql);
     if ($query) {
         while ($result = mysqli_fetch_assoc($query)) {//area
             echo "<div id='q'>"
-            . "<div> Area: " . $result['bnome'] . "</div>"
-            . "<div> Nome: " . $result['nome'] . "</div>"
+            . "<div> Area: " . $result['nome'] . "</div>"
+            . "<div> Nome: " . $result['bnome'] . "</div>"
             . "<div> Desc: " . $result['desc'] . "</div>"
             . "<div> HP: " . $result['hp'] . "</div>"
             . "<div> EN: " . $result['en'] . "</div>"
@@ -186,14 +278,14 @@ function questSearch($area) {//adicionei isto
             . "<div> Ouro: " . $result['ouro'] . "</div>"
             . "<div> Moedas: " . $result['moedas'] . "</div>"
             . "<div> Exp: " . $result['exp'] . "</div>"
-            . "<div> Bloqueada: " . $result['unlock'] . "</div>"
-            . "<div> Ativa: " . $result['ativa'] . "</div>"
-            . "<a href='quest.php?q=" . $result['id'] . "&t=0&show=0'> accept </a>"
+//            . "<div> Bloqueada: " . $result['unlock'] . "</div>"
+//            . "<div> Ativa: " . $result['ativa'] . "</div>"
+            . "<a href='QuestShow.php?q=" . $result['id'] . "&gocu=0&goq=0&t=0&show=0'> accept </a>"
             . "</div><br/>";
         }
-    } else {
-        echo "<div id='q'> Sem resultado </div>";
-    }
+    }// else {
+//        echo "<div id='q'> Sem resultado </div>";
+//    }
 }
 
 /* SISTEMA MONETARIO */

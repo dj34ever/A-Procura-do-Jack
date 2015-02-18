@@ -7,7 +7,8 @@ if (isset($_POST['submit'])) {
     } elseif (empty($_POST['password'])) {
         die(header('Location: main.php?false=1'));
     }
-    $username = dbEscapeString($dbConn, $_POST['username']);
+    
+    $username = dbEscapeString($_POST['username']);
     $password = dbEscapeString($_POST['password']);
     $password = hash("sha512", $password);
     $sql = "SELECT id FROM utilizador WHERE username = '" . $username . "' AND password = '" . $password . "' LIMIT 1";
