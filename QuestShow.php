@@ -57,7 +57,8 @@ and open the template in the editor.
                 <input type="button" value="close" />
             </div>
             <script>
-                function menu(quests) {
+                function cbArea(quests) {
+                    $('#quest').append($("<option>Escolha uma das opções</option>").attr("selected", "selected"));
                     $.each(quests, function (value) {
                         $('#quest')
                                 .append($("<option></option>")
@@ -66,14 +67,15 @@ and open the template in the editor.
                     });
                     $(function () {
                         $("#quest").selectmenu({
-                        change: function (event, data) {
-                            window.location.href = ("QuestShow.php?area=" + quests[0][1] + "&goq=" + data.item.value);}
+                            change: function (event, data) {
+                                console.log(data.item.value);
+                                window.location.href = ("QuestShow.php?area=" + quests[0][1] + "&goq=" + data.item.value + "gocu=0");
+                            }
                         });
-                    
                     });
                 }
-            </script>
 
+            </script>
 
 
 
@@ -96,8 +98,8 @@ and open the template in the editor.
                         if (!empty($arrayquest)) {
                             $arrayquest = json_encode($arrayquest); //converte array para json-> enviar para javascript
                             echo "<label for=\"quest\">Selecionar Quest</label>";
-                            echo "<select id=\"quest\"></select>";
-                            echo "<script>menu($arrayquest);</script>";
+                            echo "<select id=\"quest\" ></select>";
+                            echo "<script>cbArea($arrayquest);</script>";
                         }
                     } else {
                         echo " URL FOI MEXIDA!";
