@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 //Obtem valores do utilizador (ouro, moedas ...)
 function getuservalues() {
     if (!isset($_SESSION['utilizador']['nome'])) {
@@ -107,66 +110,75 @@ function showPlayerCreature() {//show all creatures from player in session
     $query = dbFetch($sql);
     $i = 0;
     if ($query) {
-        while ($result = mysqli_fetch_assoc($query)) {
-            echo "<div id='c'>"
-            . "<div>Id: " . $result['id'] . "</div>"
-            . "<div>Jogador: " . $result['buser'] . "<div>"
-            . "<div>Criatura: " . $result['c_id'] . "<div>"
-            . "<div>Imagem: <img src='" . $result['img'] . "' alt='criatura " . $result['id'] . "'/></div>"
-            . "<div>Nome: " . $result['nome'] . "</div>"
-            . "<div>Evolução: " . $result['evol'] . "</div>"
-            . "<div>HP: " . $result['hp'] . "</div>"
-            . "<div>EN: " . $result['en'] . "</div>"
-            . "<br/>";
-        }
-    } else {
-        echo "<div id='c'>Sem Registos</div>";
-}
+
+        return mysqli_fetch_all($query);
+    }
+//        while ($result = mysqli_fetch_assoc($query)) {
+//            echo "<div id='c'>"
+//            . "<div>Id: " . $result['id'] . "</div>"
+//            . "<div>Jogador: " . $result['buser'] . "<div>"
+//            . "<div>Criatura: " . $result['c_id'] . "<div>"
+//            . "<div>Imagem: <img src='" . $result['img'] . "' alt='criatura " . $result['id'] . "'/></div>"
+//            . "<div>Nome: " . $result['nome'] . "</div>"
+//            . "<div>Evolução: " . $result['evol'] . "</div>"
+//            . "<div>HP: " . $result['hp'] . "</div>"
+//            . "<div>EN: " . $result['en'] . "</div>"
+//            . "<br/>";
+//        }
+//    } else {
+//        echo "<div id='c'>Sem Registos</div>";
+//    }
 }
 
 function showCreatureQuest($id) {
     //obtem quest
     $qid = dbEscapeString($id); //id da quest
     $sql = "SELECT a.*, c.username as cuser FROM criatura_utilizador a, quest b, utilizador c WHERE a.en>=b.en AND b.en IN(SELECT en FROM quest WHERE id=$qid) AND"
-      ." a.hp>=b.hp AND b.hp IN(SELECT hp FROM quest WHERE id=$qid) AND c.id='" . $_SESSION['utilizador']['id'] . "' AND a.c_id NOT IN(SELECT cu_id FROM quest_utilizador)";
+            . " a.hp>=b.hp AND b.hp IN(SELECT hp FROM quest WHERE id=$qid) AND c.id='" . $_SESSION['utilizador']['id'] . "' AND a.c_id NOT IN(SELECT cu_id FROM quest_utilizador)";
     $query = dbFetch($sql);
-    if ($query) {//existe a quest        
-        while ($result = mysqli_fetch_assoc($query)) {
-            echo "<div id='c'>"
-            . "<div>Id: " . $result['id'] . "</div>"
-            . "<div>Jogador: " . $result['cuser'] . "<div>"
-            . "<div>Criatura: " . $result['c_id'] . "<div>"
-            . "<div>Imagem: <img src='" . $result['img'] . "' alt='criatura " . $result['id'] . "'/></div>"
-            . "<div>Nome: " . $result['nome'] . "</div>"
-            . "<div>Evolução: " . $result['evol'] . "</div>"
-            . "<div>HP: " . $result['hp'] . "</div>"
-            . "<div>EN: " . $result['en'] . "</div>"
-            . "<a class='button' href='QuestShow.php?gocu=" . $result['id'] . "&goq=" . $qid . "&t=0&show=0'> accept </a></div><br/>";
-        }
-    } else {
-        echo 'Não existem criaturas.'; die(header('Location: QuestShow.php?gocu=0&goq=0&t=0&show=0'));
+    if ($query) {//existe a quest      
+        return mysqli_fetch_all($query);
     }
+//        while ($result = mysqli_fetch_assoc($query)) {
+//            echo "<div id='c'>"
+//            . "<div>Id: " . $result['id'] . "</div>"
+//            . "<div>Jogador: " . $result['cuser'] . "<div>"
+//            . "<div>Criatura: " . $result['c_id'] . "<div>"
+//            . "<div>Imagem: <img src='" . $result['img'] . "' alt='criatura " . $result['id'] . "'/></div>"
+//            . "<div>Nome: " . $result['nome'] . "</div>"
+//            . "<div>Evolução: " . $result['evol'] . "</div>"
+//            . "<div>HP: " . $result['hp'] . "</div>"
+//            . "<div>EN: " . $result['en'] . "</div>"
+//            . "<a class='' href='QuestShow.php?gocu=" . $result['id'] . "&goq=" . $qid . "&t=0&show=0'> accept </a></div><br/>";
+//        }
+//    } else {
+//        echo 'Não existem criaturas.'; die(header('Location: QuestShow.php?gocu=0&goq=0&t=0&show=0'));
+//    }
 }
 
 ///////////////////////////////////////////////////TESTE///////////////////////////////////////////////////////
-function test() {//update 1
-    $sql = "SELECT * FROM quest_utilizador WHERE u_id=" . $_SESSION['utilizador']['id'];
+function listarQuestsAtivas() {
+    $sql = "SELECT c.img, qu.*, c.nome, c.hp, c.en, q.nome FROM quest_utilizador qu, criatura_utilizador c, quest q WHERE qu.u_id=" . $_SESSION['utilizador']['id']." and qu.u_id=c.u_id and qu.q_id=q.id";
+
     $query = dbFetch($sql);
-    while ($result = mysqli_fetch_assoc($query)) {//ERRO?
-        echo "<div id='q'>"
-        . "<div>Id: " . $result['id'] . "</div>"
-        . "<div>Jogador ID: " . $result['u_id'] . "<div>"
-        . "<div>Quest ID: " . $result['q_id'] . "<div>"
-        . "<div>Criatura ID: " . $result['cu_id'] . "<div>"
-        . "<div>TEMPO: " . $result['tempo'] . "<div>"
-        . "<div>ATIVA: " . $result['ativa'] . "</div>"
-        . "<br/>";
+    if ($query) {//existe a quest      
+        return mysqli_fetch_all($query);
     }
+//    while ($result = mysqli_fetch_assoc($query)) {//ERRO?
+//        echo "<div id='q'>"
+//        . "<div>Id: " . $result['id'] . "</div>"
+//        . "<div>Jogador ID: " . $result['u_id'] . "<div>"
+//        . "<div>Quest ID: " . $result['q_id'] . "<div>"
+//        . "<div>Criatura ID: " . $result['cu_id'] . "<div>"
+//        . "<div>TEMPO: " . $result['tempo'] . "<div>"
+//        . "<div>ATIVA: " . $result['ativa'] . "</div>"
+//        . "<br/>";
+//    }
 }
 
 ///PROBLEMA!
-function insertQUValue($qid, $cuid) { 
-    require_once ("config.php");
+function insertQUValue($qid, $cuid) {
+    include_once('config.php');
     getuservalues();
     $aux = $_SESSION['utilizador']['id'];
     $sql="SELECT id FROM utilizador WHERE id=".$aux;
@@ -241,20 +253,22 @@ function showCreature() {//todas as criaturas do utilizador
     $sql = "SELECT a.*, b.username as buser FROM criatura_utilizador a, utilizador b"
             . " WHERE a.u_id=b.id AND b.username='" . $_SESSION['utilizador']['nome'] . "'";
     $query = dbFetch($sql);
-
-    while ($result = mysqli_fetch_assoc($query)) {
-        echo "<div id='c'>"
-        . "<div>Id: " . $result['id'] . "</div>"
-        . "<div>Jogador: " . $result['buser'] . "<div>"
-        . "<div>Criatura: " . $result['c_id'] . "<div>"
-        . "<div>Imagem: <img src='" . $result['img'] . "' alt='criatura " . $result['id'] . "'/></div>"
-        . "<div>Nome: " . $result['nome'] . "</div>"
-        . "<div>Evolução: " . $result['evol'] . "</div>"
-        . "<div>HP: " . $result['hp'] . "</div>"
-        . "<div>EN: " . $result['en'] . "</div>"
-        . "<div>EN: " . $result['ativa'] . "</div>"
-        . "<br/>";
+    if ($query) {
+        return mysqli_fetch_all($query);
     }
+//    while ($result = mysqli_fetch_assoc($query)) {
+//        echo "<div id='c'>"
+//        . "<div>Id: " . $result['id'] . "</div>"
+//        . "<div>Jogador: " . $result['buser'] . "<div>"
+//        . "<div>Criatura: " . $result['c_id'] . "<div>"
+//        . "<div>Imagem: <img src='" . $result['img'] . "' alt='criatura " . $result['id'] . "'/></div>"
+//        . "<div>Nome: " . $result['nome'] . "</div>"
+//        . "<div>Evolução: " . $result['evol'] . "</div>"
+//        . "<div>HP: " . $result['hp'] . "</div>"
+//        . "<div>EN: " . $result['en'] . "</div>"
+//        . "<div>EN: " . $result['ativa'] . "</div>"
+//        . "<br/>";
+//    }
 }
 
 /* QUEST */
@@ -272,25 +286,8 @@ function questSearch($area) {//adicionei isto
     $sql = "SELECT a.*, b.nome as bnome FROM quest a, area b WHERE $a=b.area AND b.area=a.area";
     $query = dbFetch($sql);
     if ($query) {
-        while ($result = mysqli_fetch_assoc($query)) {//area
-            echo "<div id='q'>"
-            . "<div> Area: " . $result['nome'] . "</div>"
-            . "<div> Nome: " . $result['bnome'] . "</div>"
-            . "<div> Desc: " . $result['desc'] . "</div>"
-            . "<div> HP: " . $result['hp'] . "</div>"
-            . "<div> EN: " . $result['en'] . "</div>"
-            . "<div> Tempo: " . $result['temp'] . "</div>"
-            . "<div> Ouro: " . $result['ouro'] . "</div>"
-            . "<div> Moedas: " . $result['moedas'] . "</div>"
-            . "<div> Exp: " . $result['exp'] . "</div>"
-//            . "<div> Bloqueada: " . $result['unlock'] . "</div>"
-//            . "<div> Ativa: " . $result['ativa'] . "</div>"
-            . "<a class='button' href='QuestShow.php?q=" . $result['id'] . "&gocu=0&goq=0&t=0&show=0'> accept </a>"
-            . "</div><br/>";
-        }
-    }// else {
-//        echo "<div id='q'> Sem resultado </div>";
-//    }
+        return mysqli_fetch_all($query);
+    }
 }
 
 /* SISTEMA MONETARIO */

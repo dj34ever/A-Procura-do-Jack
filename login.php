@@ -7,20 +7,20 @@ if (isset($_POST['submit'])) {
     } elseif (empty($_POST['password'])) {
         die(header('Location: main.php?false=1'));
     }
-    
+
     $username = dbEscapeString($_POST['username']);
     $password = dbEscapeString($_POST['password']);
     $password = hash("sha512", $password);
     $sql = "SELECT id FROM utilizador WHERE username = '" . $username . "' AND password = '" . $password . "' LIMIT 1";
     $query = dbFetch($sql);
-    if (!mysqli_num_rows($query)) die(header('Location: main.php?false=2'));    
+    if (!mysqli_num_rows($query)) {
+        die(header('Location: main.php?false=2'));
+    }
     //O nome de utilizador e palavra passe está correcto
-        session_start();
-        $_SESSION['utilizador']['nome'] = $username;
-        header('Location: game.php');
-    } 
-        
-else{
+    session_start();
+    $_SESSION['utilizador']['nome'] = $username;
+    header('Location: game.php');
+} else {
     die(header('Location: main.php?false=3'));
 }
 ?>

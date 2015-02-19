@@ -57,7 +57,7 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                         tempo--;
                         if (tempo < 0)
                             window.location.reload(true);
-                    }, 1000);
+                    }, 1000); 
             }
         </script>
     </head>
