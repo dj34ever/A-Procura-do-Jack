@@ -69,9 +69,9 @@ if (!isset($_SESSION['utilizador']['nome'])) {
             </div>
             <div id="menu"><!--ALTEREI AQUI-->
                 <span>
-                    <a href="#" class="button" type="button"> Button1 </a>
-                    <a href="QuestShow.php" class="button" type="button" value="Mapa"> Verificar </a></span>
-	            <a href="#" class="button" type="button"> Button2 </a>
+                    <a href="#" class="button" type="button"> Home </a>
+                    <a href="QuestShow.php" class="button" type="button" value="Mapa"> Mapa </a></span>
+	            <a href="#" class="button" type="button"> ... </a>
 	            <a href="#" class="button" type="button"  onclick="window.location.href = 'logout.php'"> Logout </a>
                 </span>
 <!--                <input class="btn" type="button" value="button1"/>

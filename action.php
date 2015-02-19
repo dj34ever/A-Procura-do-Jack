@@ -141,7 +141,7 @@ function showCreatureQuest($id) {
             . "<div>Evolução: " . $result['evol'] . "</div>"
             . "<div>HP: " . $result['hp'] . "</div>"
             . "<div>EN: " . $result['en'] . "</div>"
-            . "<a class='' href='QuestShow.php?gocu=" . $result['id'] . "&goq=" . $qid . "&t=0&show=0'> accept </a></div><br/>";
+            . "<a class='button' href='QuestShow.php?gocu=" . $result['id'] . "&goq=" . $qid . "&t=0&show=0'> accept </a></div><br/>";
         }
     } else {
         echo 'Não existem criaturas.'; die(header('Location: QuestShow.php?gocu=0&goq=0&t=0&show=0'));
@@ -285,7 +285,7 @@ function questSearch($area) {//adicionei isto
             . "<div> Exp: " . $result['exp'] . "</div>"
 //            . "<div> Bloqueada: " . $result['unlock'] . "</div>"
 //            . "<div> Ativa: " . $result['ativa'] . "</div>"
-            . "<a href='QuestShow.php?q=" . $result['id'] . "&gocu=0&goq=0&t=0&show=0'> accept </a>"
+            . "<a class='button' href='QuestShow.php?q=" . $result['id'] . "&gocu=0&goq=0&t=0&show=0'> accept </a>"
             . "</div><br/>";
         }
     }// else {

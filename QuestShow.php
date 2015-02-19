@@ -23,7 +23,7 @@ and open the template in the editor.
         <?php
         // put your code here
         ?>
-        <div><!--JANELA PRINCIPAL-->
+        <div id="jp"><!--JANELA PRINCIPAL-->
             <div id="openMap"><!--JANELA MAPA-->
                 <div id="mapTitle"><img src="images/map_elellor_2.png" alt="Elellor" /></div>
                 <div id="mapImg">
@@ -44,7 +44,9 @@ and open the template in the editor.
                     <a id="m3" href="QuestShow.php?gocu=0&goq=0&t=3">3</a>
                     <a id="m4" href="QuestShow.php?gocu=0&goq=0&t=4">4</a>
                 </div>
-                <input type="button" value="close" />
+                <div class="zi">
+                    <a class="button" href="game.php" value="">Return</a>
+                </div>
             </div>
             <div id="openQuest"><!--JANELA QUEST-->
                 <?php

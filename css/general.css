@@ -359,3 +359,11 @@ p,H1{color: blanchedalmond;}
     } 
     /* FONT GLYPH (MOSTLY FOR FUN) */
     
+    .zi{
+        position: relative;
+        height: 100px;
+    }
+    
+    #jp{
+        margin: auto;
+    }
