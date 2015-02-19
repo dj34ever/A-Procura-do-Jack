@@ -184,3 +184,178 @@ p,H1{color: blanchedalmond;}
 #close{
     display: none;
 }*/
+
+/*Pagina login*/
+@font-face {
+  font-family: 'Tangerine';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Tangerine'), url(http://fonts.gstatic.com/s/tangerine/v6/HGfsyCL5WASpHOFnouG-RFtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+}
+
+.banner{
+    width:70%;
+    height:400px;
+    left:200px;
+    right:200px;
+    position:relative;
+    border-radius: 100px;
+    
+}
+.wrap {
+	width:250px;
+	height: auto;
+	margin: auto;
+	margin-top: 50px;
+}
+.avatar {
+	width: 100%;
+	margin: auto;
+	width: 65px;
+	border-radius: 100px;
+	height: 65px;
+	background:  #980002 ;
+	position: relative;
+	bottom: -15px;
+}
+.avatar img {
+	width: 55px;
+	height: 55px;
+	border-radius: 100px;
+	margin: auto;
+	border:3px solid  #FFD700;
+	display: block;
+}
+.wrap input {
+	border: none;
+	background: #fff;
+  font-family:"Tangerine" ;
+  font-weight:700 ;
+	display: block;
+	height: 40px;
+	outline: none;
+	width: calc(100% - 24px) ;
+	margin: auto;
+	padding: 6px 12px 6px 12px;
+}
+.bar {
+	width: 100%;
+	height: 1px;
+	background: #fff ;
+}
+.bar i {
+	width: 95%;
+	margin: auto;
+	height: 1px ;
+	display: block;
+	background: #d1d1d1;
+}
+
+
+.wrap input[id="ut"] {
+	border-radius: 7px 7px 0px 0px ;
+}
+.wrap input[type="password"] {
+	border-radius: 0px 0px 7px 7px ;
+}
+
+
+
+
+.wrap button {
+	width: 100%;
+	border-radius: 7px;
+	background: #b6ee65;
+	text-decoration: center;
+	border: none;
+	color: #51771a;
+  margin-top:-5px;
+	padding-top: 14px;
+	padding-bottom: 14px;
+	outline: none;
+	font-size: 13px;	
+	border-bottom: 3px solid #307d63;
+	cursor: pointer;
+	}
+.round-button {
+	width:25%;
+}
+.round-button-circle {
+	width: 100%;
+	height:0;
+	padding-bottom: 100%;
+    border-radius: 50%;
+	border:5px solid  #FFD700;
+    overflow:hidden;
+    
+    background: #980002; 
+    box-shadow: 0 0 3px gray;
+}
+.round-button-circle:hover {
+	background:#670f10;
+}
+.round-button a {
+    display:block;
+	float:left;
+	width:100%;
+	padding-top:50%;
+    padding-bottom:50%;
+	line-height:1em;
+	margin-top:-0.5em;
+    
+	text-align:center;
+	color:#e2eaf3;
+    font-family:Tangerine;
+    font-size:15px;
+    font-weight:bold;
+	cursor: pointer;
+	    text-decoration:none;
+
+}
+  .button { 
+     width: 90px; 
+     height: 30px; 
+     line-height: 30px; 
+     color: white; 
+     text-decoration: none; 
+     font-size: 15px; 
+     font-family: helvetica, arial; 
+     font-weight: bold; 
+   display: inline-block;
+    text-align: center; 
+/*     position: relative; */
+  
+     
+  
+     /* BORDER RADIUS */
+     -moz-border-radius: 10px; 
+     -webkit-border-radius: 10px; 
+     border-radius: 10px; 
+  
+     border: 1px solid gold; 
+     border-top: 1px solid goldenrod; 
+  
+     /* TEXT SHADOW */
+  
+     text-shadow: 1px 1px 1px black; 
+  
+     /* BOX SHADOW */
+     -moz-box-shadow: 0 1px 3px black; 
+     -webkit-box-shadow: 0 1px 3px black; 
+     box-shadow: 0 1px 3px black; 
+    } 
+  
+    /* WHILE HOVERED */
+    .button:hover { 
+        background: crimson; 
+        background: -moz-linear-gradient(top, #83170A, #FF1A00 50%, #D23726 51%, #83170A); 
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #83170A), color-stop(.5, #FF1A00), color-stop(.51, #D23726), to(#83170A)); 
+    } 
+  
+    /* WHILE BEING CLICKED */
+    .button:active { 
+        -moz-box-shadow: 0 2px 6px black; 
+        -webkit-box-shadow: 0 2px 6px black; 
+    } 
+    /* FONT GLYPH (MOSTLY FOR FUN) */
+    

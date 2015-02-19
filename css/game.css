@@ -7,7 +7,7 @@ body{
     border: 1px solid #000000;
     width: 95%;
     margin: auto;
-
+    background: url(../images/ssdc.png) no-repeat;
 }
 
 
@@ -60,32 +60,32 @@ body{
 
 #p1{
     
-    top: 150px;
-    left: 180px;
+    top: 205px;
+    left: 80px;
     position: absolute;
 }
 #p2{
     
-    top: 100px;
-    left: 500px;
+    top: 190px;
+    left: 590px;
         position: absolute;
 }
 #p3{
     
-    top: 400px;
-    left: 280px;
+    top: 317px;
+    left: 178px;
         position: absolute;
 }
 #p4{
     
-    top: 340px;
-    left: 600px;
+    top: 460px;
+    left: 550px;
         position: absolute;
 }
 #p5{
     
-    top: 250px;
-    left: 420px;
+    top: 380px;
+    left: 410px;
         position: absolute;
 }
 
@@ -98,7 +98,7 @@ body{
 }
 
 #g-map{
-    background: url(../images/test_floor.png) no-repeat;
+    background: url(../images/terrain.png) no-repeat;
     //background-size: 100%;
     width: 801px;
     height: 473px;
@@ -119,6 +119,14 @@ body{
     // float: right;
     //overflow: hidden;
     height: 100%;
+    background-color: #040515;
+    border: 1px solid #000000;
+    //position: relative;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-left: 15px;
+    border-radius: 10px;
+    //box-shadow: 10px 10px 5px #888888;
 }
 
 
@@ -129,10 +137,19 @@ body{
 
 #g-info{
     float: left;
-    width: 69%;
+    width: 25%;
     height: 100%;
-    background-color: #0056FF;
+    background-color: #040515;
     border: 1px solid #000000;
+    border-radius: 15px;
+    box-shadow: 10px 10px 5px #888888;
+}
+
+.player{
+    width:90px;
+    height:80px;
+    margin-top: 15px;
+    border-radius: 10px;
 }
 
 #lb{
@@ -151,11 +168,14 @@ body{
     float: left;
     width: 27%;
     height: 100%;
-    background-color: aquamarine;
+    background-color: #040515;
     border: 1px solid #000000;
     position: relative;
     padding-right: 10px;
-    padding-left: 10px
+    padding-left: 10px;
+    margin-left: 15px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px #888888;
 }
 
 #news{
@@ -163,8 +183,9 @@ body{
 }
 
 #header img {
-    width: 50px;
-    height: 50px;
+    z-index: -1;
+    width: 235px;
+    height: 115px;
 }
 /*
 @media screen and (max-width: 490.9px) {

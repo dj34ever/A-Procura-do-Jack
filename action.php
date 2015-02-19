@@ -6,13 +6,14 @@ function getuservalues() {
         die(header('Location: logout.php'));
     }
     //Dados de User
-    $sql = "SELECT id, moedas, ouro, ativa FROM utilizador where username='" . $_SESSION['utilizador']['nome'] . "'";
+    $sql = "SELECT id, moedas, ouro, ativa, tipo FROM utilizador where username='" . $_SESSION['utilizador']['nome'] . "'";
     $query = dbFetch($sql);
     $result = mysqli_fetch_assoc($query);
     $_SESSION['utilizador']['id'] = $result['id'];
     $_SESSION['utilizador']['moedas'] = $result['moedas'];
     $_SESSION['utilizador']['ouro'] = $result['ouro'];
     $_SESSION['utilizador']['ativa'] = $result['ativa'];
+    $_SESSION['utilizador']['tipo'] = $result['tipo'];//adicionei isto!
 
     //Dados da cidade
     $sql = "SELECT id, nome FROM cidade where id_utilizador='" . $_SESSION['utilizador']['id'] . "'";
@@ -120,7 +121,7 @@ function showPlayerCreature() {//show all creatures from player in session
         }
     } else {
         echo "<div id='c'>Sem Registos</div>";
-    }
+}
 }
 
 function showCreatureQuest($id) {
@@ -164,14 +165,24 @@ function test() {//update 1
 }
 
 ///PROBLEMA!
-function insertQUValue($uid, $qid, $cuid) {
-    include_once('config.php');
+function insertQUValue($qid, $cuid) { 
+    require_once ("config.php");
     getuservalues();
-    $uid = $_SESSION['utilizador']['id'];
+    $aux = $_SESSION['utilizador']['id'];
+    $sql="SELECT id FROM utilizador WHERE id=".$aux;
+    $query = dbFetch($sql);
+    $result = mysqli_fetch_assoc($query);
+    $uid = $result['id'];
+    
     $temp = getQuestTime($qid);
-    $sql = "INSERT INTO quest_utilizador (u_id, q_id, cu_id, temp) VALUES ('".$uid."', '".$qid."', '".$cuid."', '".$temp."')";
+    //INSERT INTO `david_dicas`.`quest_utilizador` (`id`, `u_id`, `q_id`, `cu_id`, `tempo`) VALUES (NULL, '1', '2', '3', '00:06:00');
+    $sql = "INSERT INTO quest_utilizador (u_id, q_id, cu_id, temp) VALUES (NULL, '$uid', '$qid', '$cuid', '$temp')";
+    echo $sql;
+    //"INSERT INTO edificio_cidade (id_cidade, id_edificio,tempo_construcao_final,pos) VALUES ( " . $result['id'] . ", 5, '00:00:00', $i)";
     //$query = dbFetch($sql);
-    dbFetch($sql);
+    //$query = dbFetch($sql);
+    $query = dbFetch($sql);
+    if(!$query){echo 'yes: '.$query;}else { echo 'no: '.$query;}
 }
 
 //function updateQUValue($id, $cuid, $qtemp){
@@ -179,12 +190,6 @@ function insertQUValue($uid, $qid, $cuid) {
 //    //$query = dbFetch($sql);
 //    dbFetch($sql);
 //}
-
-function activateQuest($cuid, $qtemp, $id) {//ativa quest_utilizador
-    $sql = "UPDATE quest_utilizador SET cu_id=$cuid, temp=$qtemp WHERE id=$id";
-    //$query = dbFetch($sql);
-    dbFetch($sql);
-}
 
 function getQuestTime($qid) {//tempo da quest
     $sql = "SELECT temp FROM quest WHERE id=$qid";
@@ -216,13 +221,13 @@ function LowerStat($cuid, $qid) {//Diminui EN e HP automático
 
     //exp da quest
     $exp = getExpQuest($qid);
+    updateCreatureUtilizador($qid, $cuid, $exp, $HP, $EN);
+}
 
-    function updateCreatureUtilizador($qid, $cuid, $exp, $HP, $EN) {//faz update da criatura, eh, hp, exp
+function updateCreatureUtilizador($qid, $cuid, $exp, $HP, $EN) {//faz update da criatura, eh, hp, exp
         $sql = "UPDATE criatura_utilizador SET en=$EN, hp=$HP WHERE c_id=$cuid AND u_id='" . $_SESSION['utilizador']['id'] . "'";
         $query = dbFetch($sql);
     }
-
-}
 
 function getExpQuest($qid) {//get exp from quest
     $sql = "SELECT exp from quest WHERE id=$qid";

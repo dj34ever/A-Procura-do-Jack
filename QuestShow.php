@@ -39,10 +39,10 @@ and open the template in the editor.
                     <form action="quest.php" method="POST">
                         <input type="submit" id="m4" name="qa4" value="4"/>
                     </form>-->
-                    <a id="m1" href="QuestShow.php?gocu=0&goq=0&t=1&show=0">1</a>
-                    <a id="m2" href="QuestShow.php?gocu=0&goq=0&t=2&show=0">2</a>
-                    <a id="m3" href="QuestShow.php?gocu=0&goq=0&t=3&show=0">3</a>
-                    <a id="m4" href="QuestShow.php?gocu=0&goq=0&t=4&show=0">4</a>
+                    <a id="m1" href="QuestShow.php?gocu=0&goq=0&t=1">1</a>
+                    <a id="m2" href="QuestShow.php?gocu=0&goq=0&t=2">2</a>
+                    <a id="m3" href="QuestShow.php?gocu=0&goq=0&t=3">3</a>
+                    <a id="m4" href="QuestShow.php?gocu=0&goq=0&t=4">4</a>
                 </div>
                 <input type="button" value="close" />
             </div>
@@ -55,15 +55,12 @@ and open the template in the editor.
                  */
                 getuservalues();
                     //Mostrar quest de acordo com a area selecionada
-                    if(!empty($_GET['t']) && !empty($_GET['show']) || $_GET['show']==0 && !empty($_GET['t'])){//ambas têm de estar preenchidas
+                    if(!empty($_GET['t'])){//ambas têm de estar preenchidas
                     $area =  dbEscapeString($_GET['t']);
-                    $show = dbEscapeString($_GET['show']);
                         echo "AREA Nº: ".$_GET['t']." MOSTRA: ".$_GET['show'];//debug
-                        if($show == 0 && $area > 0 || $area < 5){//show tem de ser true //t tem de ser de 1 a 4
+                        if($area > 0 && $area < 5){//show tem de ser true //t tem de ser de 1 a 4
                                 echo "<p>" . $area . "</p>";//debug
                                 questSearch($area);//este está a ser problemátivo
-                        }else{
-                            echo " URL FOI MEXIDA!";
                         }
                     }//recebo o id da quest $_GET['q']
                     
@@ -86,7 +83,7 @@ and open the template in the editor.
                     if($cu!=NULL || $qi!=NULL || $cu>0 || $qi>0){
                         //inserir na tabela quest_utilizador
                         //$uid, $qi, $cuid, $tmp
-                        insertQUValue($_SESSION['utilizador']['nome'], $qi, $cu);//insere na tabela
+                        insertQUValue($qi, $cu);//insere na tabela
                     }    
                 }
                 

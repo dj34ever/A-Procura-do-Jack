@@ -64,13 +64,20 @@ if (!isset($_SESSION['utilizador']['nome'])) {
     <body>
         <div id="top" >
             <div id="header">
-                <img src="images/draco_ico_temp.png" alt="Procura o Jack" />
+                <img class="newbanner" src="images/AprocuraDeJack.png" />
+<!--                <img src="images/draco_ico_temp.png" alt="Procura o Jack" />-->
             </div>
             <div id="menu"><!--ALTEREI AQUI-->
-                <input class="btn" type="button" value="button1"/>
+                <span>
+                    <a href="#" class="button" type="button"> Button1 </a>
+                    <a href="QuestShow.php" class="button" type="button" value="Mapa"> Verificar </a></span>
+	            <a href="#" class="button" type="button"> Button2 </a>
+	            <a href="#" class="button" type="button"  onclick="window.location.href = 'logout.php'"> Logout </a>
+                </span>
+<!--                <input class="btn" type="button" value="button1"/>
                 <input class="btn" type="button" href="#openModal" value="Mapa"/>
                 <input class="btn" type="button" value="button3"/>
-                <input class="btn" type="button" value="Logout" onclick="window.location.href = 'logout.php'"/>
+                <input class="btn" type="button" value="Logout" onclick="window.location.href = 'logout.php'"/>-->
             </div>
         </div>
         <div id="content" >
@@ -109,8 +116,11 @@ if (!isset($_SESSION['utilizador']['nome'])) {
                 </div>
 
             </div>
+            <br/>
+            <br/>
             <div id="g-window2">
                 <div id="g-info">
+                    <img class="player" src="images/player.png"/>
 <!--                    <script>
                     $("<div>" + "msg" + "</div>").dialog({
                         modal: true,
