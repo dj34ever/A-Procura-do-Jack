@@ -24,31 +24,48 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="css/general.css" />
         <script src="jquery/jquery-1.11.2.min.js" ></script>
         <script src="jquery/jquery-ui.js" ></script>
-        <link rel="stylesheet" href="/resources/demos/style.css">
-        <link rel="stylesheet" href="jquery/jquery-ui.css">
+        <link href="jquery/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <link href="jquery/jquery-ui.structure.css" rel="stylesheet" type="text/css"/>
+        <link href="css/QuestShow.css" rel="stylesheet" type="text/css"/>
         <title>Mapa Elellor</title>
 
+        <script>
+
+            //gera combobox com lista de quests
+            function cbArea(quests) {
+                //adiciona 1ª opção à lista
+                $('#quest').append($("<option>Escolha uma das opções</option>").attr("selected", "selected"));
+                //adiciona restantes
+                $.each(quests, function (value) {
+                    $('#quest').append($("<option></option>").attr("value", quests[value][0]).text(quests[value][2]));
+                });
+                //adiciona o evento
+                $(function () {
+                    $("#quest").selectmenu({
+                        change: function (event, data) {
+                            
+                            
+                            
+                            msg = "Quest " + data.item.label;
+                            console.log(data.item.value);
+                            $("<div>" + msg + "</div>").dialog({modal: true, buttons: {"Enviar para a Quest": function () {
+                                        $(this).dialog("close");
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+            }
+        </script>
     </head>
     <body>
-        <?php
-// put your code here
-        ?>
+
+
         <div><!--JANELA PRINCIPAL-->
             <div id="openMap"><!--JANELA MAPA-->
                 <div id="mapTitle"><img src="images/map_elellor_2.png" alt="Elellor" /></div>
                 <div id="mapImg">
-                    <!--                    <form action="quest.php" method="POST">
-                                            <input type="submit" id="m1" name="qa1" value="1"/>
-                                        </form>
-                                        <form action="quest.php" method="POST">
-                                            <input type="submit" id="m2" name="qa2" value="2"/>
-                                        </form>
-                                        <form action="quest.php" method="POST">
-                                            <input type="submit" id="m3" name="qa3" value="3"/>
-                                        </form>
-                                        <form action="quest.php" method="POST">
-                                            <input type="submit" id="m4" name="qa4" value="4"/>
-                                        </form>-->
                     <a id="m1" href="QuestShow.php?gocu=0&goq=0&area=1">1</a>
                     <a id="m2" href="QuestShow.php?gocu=0&goq=0&area=2">2</a>
                     <a id="m3" href="QuestShow.php?gocu=0&goq=0&area=3">3</a>
@@ -56,26 +73,7 @@ and open the template in the editor.
                 </div>
                 <input type="button" value="close" />
             </div>
-            <script>
-                function cbArea(quests) {
-                    $('#quest').append($("<option>Escolha uma das opções</option>").attr("selected", "selected"));
-                    $.each(quests, function (value) {
-                        $('#quest')
-                                .append($("<option></option>")
-                                        .attr("value", quests[value][0])//.attr("value", value)
-                                        .text(quests[value][2])); //.text(value)); 
-                    });
-                    $(function () {
-                        $("#quest").selectmenu({
-                            change: function (event, data) {
-                                console.log(data.item.value);
-                                window.location.href = ("QuestShow.php?area=" + quests[0][1] + "&goq=" + data.item.value + "gocu=0");
-                            }
-                        });
-                    });
-                }
 
-            </script>
 
 
 
@@ -97,9 +95,9 @@ and open the template in the editor.
                         $arrayquest = questSearch($area); //este está a ser problemátivo
                         if (!empty($arrayquest)) {
                             $arrayquest = json_encode($arrayquest); //converte array para json-> enviar para javascript
-                            echo "<label for=\"quest\">Selecionar Quest</label>";
-                            echo "<select id=\"quest\" ></select>";
-                            echo "<script>cbArea($arrayquest);</script>";
+                            //echo "<label for=\"quest\">Selecionar Quest</label>"; //imprime a label
+                            echo "<p>Quest: <select id=\"quest\"></select></p>"; //cria a combobox  
+                            echo "<script>cbArea($arrayquest);</script>"; //adiciona conteudo
                         }
                     } else {
                         echo " URL FOI MEXIDA!";
@@ -109,12 +107,12 @@ and open the template in the editor.
                 <div id="openCreature">
 
                     <?php
-                    //showPlayerCreature();//mostra todas as criaturas do player
+                    $arrayCreatures = showPlayerCreature(); //mostra todas as criaturas do player
                     if (!empty($_GET['q'])) {//preenchido
                         $q = dbEscapeString($_GET['q']);
                         echo "ESCOLHE QUEST Nº: " . $_GET['q']; //debug
                         if ($q > 0 || $q != null) {
-                            showCreatureQuest($_GET['q']);
+                            $arrayCreaturesQuest = showCreatureQuest($_GET['q']);
                         }
                     }
 
@@ -129,7 +127,7 @@ and open the template in the editor.
                         }
                     }
 
-                    test();
+                    // test();
                     //showCreature(100, 1);
                     //$qid=2;
                     //echo "Quest existe? ".existQuestUtilizador($qid);//funcional
@@ -137,7 +135,38 @@ and open the template in the editor.
                     //echo "\n".$_SESSION['utilizador']['nome'];
                     ?>
                 </div>
-                <div id="">
+                <div id="Quests Actuais">
+                    <div id="users-contain" class="ui-widget">
+                        <h2>Quests a Decorrer:</h2>
+                        <table id="users" class="ui-widget ui-widget-content">
+                            <thead>
+                                <tr class="ui-widget-header ">
+                                    <th>Criatura</th>
+                                    <th>Nome</th>
+                                    <th>HP</th>
+                                    <th>EN</th>
+                                    <th>Tempo Restante</th>
+                                    <th>Quest a Participar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $questsActivas = listarQuestsAtivas();
+                                //print_r($questsActivas);
+                                foreach ($questsActivas as $row) {
+                                    echo "<tr>";
+                                    echo "<td><img src=$row[0] alt=\"Criatura\" /></td>";
+                                    echo "<td>$row[6]</td>";
+                                    echo "<td>$row[7]</td>";
+                                    echo "<td>$row[8]</td>";
+                                    echo "<td>$row[5]</td>";
+                                    echo "<td>$row[9]</td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
